@@ -1,0 +1,18 @@
+
+
+
+
+<h2>Nalezené recepty</h2>
+<div class="recipe-list">
+        
+    <div *ngFor="let recipe of recipes" class="recipe" >
+       
+        <h1>{{recipe.title}}</h1>
+        <h4>Náročnost: {{getDifficulty(recipe.difficulty)}} </h4>
+        <h4>Stravovací styl: {{getFoodStyle(recipe.foodStyle)}} </h4>
+        <h4>Časová náročnost: {{recipe.time}} minut</h4>
+        <button routerLink="/detail/{{recipe.id}}" routerLinkActive="active" class="ui toggle button details">Podrobnosti</button>
+        
+    </div>
+    
+</div>

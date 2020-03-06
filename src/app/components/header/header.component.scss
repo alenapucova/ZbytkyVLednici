@@ -1,0 +1,19 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+
+
+.header{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+       
+}
+.login{
+    float: right;
+    background-color: $secondary;
+    color: black;
+}
+.logo{
+    margin: 15px;
+}

@@ -1,0 +1,17 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+
+.recipe{
+    width: 50%;
+    background-color: $secondary;
+    margin: 50px auto 0 auto;
+    border-radius: 10px;
+}
+.title{
+    text-align: center;
+    padding-top: 40px;
+}
+.description{
+    padding-left: 40px;
+    padding-bottom: 40px;
+}

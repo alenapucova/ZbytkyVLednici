@@ -1,0 +1,41 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+$ligh-bg: rgb(214, 211, 211);
+
+.loginInput{
+    width: 200px;
+    height: 40px;
+    margin: 5px 0;
+    border: 1px solid $primary;
+    border-radius: 5px;
+
+}
+.loginBtn{
+    width: 200px;
+    background-color: $secondary;
+    color: black;
+    text-align: center;
+    border-radius: 35px;
+    box-shadow: none;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+
+   
+}
+button:hover{
+    background-color:$primary;
+    color: white;
+}
+
+.loginWindow{
+    height: 400px;
+}
+.mat-dialog-content{
+    padding-top: 40px;
+}
+input{
+    padding-left: 10px;
+}

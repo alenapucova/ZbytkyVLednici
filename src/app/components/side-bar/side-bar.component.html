@@ -1,0 +1,24 @@
+<ul class="sideBar">
+  <li *ngFor="let item of items; let i = index">
+    <button mat-button [matMenuTriggerFor]="menu" class="ui toggle button"
+      (mouseover)="openDescription($event, item.title, item.type)">{{item.title}}
+    </button>
+    <mat-menu #menu="matMenu"  >
+      <div class="menu-display">
+      <div  *ngIf="item.type === itemType.Range">
+        {{item.min}}
+          <mat-slider (click)="$event.stopPropagation();" color="primary" [thumbLabel]="true" [min]="item.min" [max]="item.max" [value]="item.def"></mat-slider>
+          {{item.max}}
+      </div>
+
+      <div *ngIf="item.type === itemType.Checkbox">
+        <div class="tabcontent" *ngFor="let option of item.options; let j = index"(click)="$event.stopPropagation();">
+          <input id="{{i.toString() + j.toString()}}" type="checkbox" >
+          <label class="option" for="{{i.toString() + j.toString()}}">{{option}}</label>
+        </div>
+      </div>
+    </div>
+    </mat-menu>
+  </li>
+</ul>
+

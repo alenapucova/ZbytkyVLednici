@@ -1,0 +1,50 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+
+ul.sideBar{
+        display: flex;
+        flex-direction: row;
+        background-color: $primary;
+        width:100%;
+        height: 60px;
+        justify-content: center;
+        margin-top:60px;
+    li{
+        list-style-type: none;
+        padding: 8px;
+        
+        .button{
+            width: 200px;
+            background-color: $secondary;
+            color: black;
+            
+        }
+    }
+    
+    
+}
+
+.mat-menu-content {
+   
+    text-align: center;
+}
+.mat-menu-panel{
+    background-color: $secondary;
+    margin-top: 20px;
+    width: 200px;
+    padding: 40px 0;
+}
+
+.tabcontent{
+    padding: 10px 0;
+    display: block;
+    text-align: left;
+}
+input[type=checkbox]{
+        float: left;
+        margin-left: 25px;
+        margin-right: 15px;
+}
+.option{
+    padding: 0 7px;
+}

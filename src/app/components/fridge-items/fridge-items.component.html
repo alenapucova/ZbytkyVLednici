@@ -1,0 +1,21 @@
+
+
+<form class="example-form" >
+      <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" name="fridgeItem" #newItem (keyup.Enter)="addItem(newItem)">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.singleIngredient}}
+        </mat-option>
+      </mat-autocomplete>
+      <button (click)="addItem(newItem)" class="ui button">Přidat surovinu</button>   
+  </form>
+
+
+
+<div class="listOfItems">
+    <ul>
+        <li class="singleItem" *ngFor="let item of allItems" >{{item.title}}
+            <button (click)="deleteItem(item)" class="deleteBtn">x</button>
+        </li>
+    </ul>
+</div>

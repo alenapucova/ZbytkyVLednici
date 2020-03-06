@@ -1,0 +1,33 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+
+.recipe-list{
+    display: grid;
+    padding-top: 40px;
+    width: 70%;
+    margin:auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    
+    .recipe{
+        border: 2px solid $primary;
+        width: 250px;
+        height: 300px;
+        text-align: center;
+        border-radius: 10px;
+
+       h1{
+           padding-top: 10px;
+       }
+    }
+}
+h2{
+    text-align: center;
+    padding-top: 30px;
+}
+.details{
+    background-color: $secondary;
+    color: black;
+    margin-top: 10px;
+
+}
