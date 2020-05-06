@@ -5,32 +5,35 @@ $ligh-bg: rgb(214, 211, 211);
 
 .example-form{
     text-align: center;
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
 
     
-    input{
-        width: 200px;
+    input, button{
+        //width: 60%;
+        flex: 1;
         height: 36px;
-        border: 1px solid $primary;
+       // border: 1px solid $primary;
         border-radius: 5px;
         padding-left:10px;
+        margin: 0px 2px;
         
+    } 
+    .unit{
+        width: 25px;
+        font-size: 20px;
+        padding-top: 7px;
     }
-    .button{
-        background-color: $secondary;
-        color: black;
-        margin-left: 10px;
-    }
+
+    
 }
 .listOfItems{
     background-color: $ligh-bg;
-    width:25%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
+    //font-family: 'Gotu', sans-serif;
 
     .deleteBtn{
         color: white;
@@ -44,9 +47,7 @@ $ligh-bg: rgb(214, 211, 211);
     }
     .singleItem{
       
-        padding: 5% 0;
+        padding: 3% 0;
+        border-radius: 5%;
     }
-}
-.example-form {
-   
 }

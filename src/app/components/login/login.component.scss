@@ -2,11 +2,13 @@ $primary: #243665;
 $secondary:#8BD8BD;
 $ligh-bg: rgb(214, 211, 211);
 
+
+
 .loginInput{
-    width: 200px;
+    //width: 80%;
     height: 40px;
-    margin: 5px 0;
-    border: 1px solid $primary;
+    margin-bottom: 5px;
+    //border: 1px solid $primary;
     border-radius: 5px;
 
 }
@@ -21,7 +23,7 @@ $ligh-bg: rgb(214, 211, 211);
     border: none;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 10px;
+    margin: 20px auto 0px auto;
 
    
 }
@@ -29,13 +31,30 @@ button:hover{
     background-color:$primary;
     color: white;
 }
-
 .loginWindow{
-    height: 400px;
+    height: 450px;
+    
+}
+::placeholder {
+    padding-left: 10px;
+  }
+
+input{
+    //padding-left: 10px;
+}
+mat-dialog-container .mat-dialog-container{
+    //overflow: hidden;
+   // width: 80%;
+   // margin: auto;
+
+}
+.mat-dialog-title {
+    text-align: center;
 }
 .mat-dialog-content{
-    padding-top: 40px;
-}
-input{
-    padding-left: 10px;
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

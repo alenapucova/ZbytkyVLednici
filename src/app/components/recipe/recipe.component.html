@@ -1,18 +1,38 @@
+<div class="recipe-block">
+
+    <h2 *ngIf="recipes && recipes.length > 0;else no_recipes">Nalezené recepty</h2>
 
 
+    <div class="recipe-list">
 
+        <div *ngFor="let recipe of recipes" class="recipe">
 
-<h2>Nalezené recepty</h2>
-<div class="recipe-list">
-        
-    <div *ngFor="let recipe of recipes" class="recipe" >
-       
-        <h1>{{recipe.title}}</h1>
-        <h4>Náročnost: {{getDifficulty(recipe.difficulty)}} </h4>
-        <h4>Stravovací styl: {{getFoodStyle(recipe.foodStyle)}} </h4>
-        <h4>Časová náročnost: {{recipe.time}} minut</h4>
-        <button routerLink="/detail/{{recipe.id}}" routerLinkActive="active" class="ui toggle button details">Podrobnosti</button>
-        
+            <mat-card class="recipe-card" routerLink="/detail/{{recipe.id}}" routerLinkActive="active">
+                <img mat-card-image src="../../../assets/img/{{recipe.id}}min.jpg" alt="recipe-pic" >
+               <!-- <i class="fa fa-heart fa-2x like" aria-hidden="true"></i>-->
+                <mat-card-header>
+                    <mat-card-title>{{recipe.title}}</mat-card-title>
+                    <div class="food-styles">
+                        <img *ngFor="let foodstyle of recipe.foodStyle" class="food-style" src="{{getFoodStyle(foodstyle)}}" alt="foodstyle">
+                    </div>
+                </mat-card-header>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="secondary" routerLink="/detail/{{recipe.id}}"
+                        routerLinkActive="active" class="details">Podrobnosti</button>
+
+                </mat-card-actions>
+           </mat-card>
+        </div>
+
     </div>
-    
 </div>
+
+<ng-template #no_recipes>
+
+    <div id="no-recipes">
+
+    </div>
+
+
+</ng-template>

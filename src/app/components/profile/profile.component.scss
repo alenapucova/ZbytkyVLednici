@@ -1,0 +1,26 @@
+$primary: #243665;
+$secondary:#8BD8BD;
+
+
+.part-one{
+   
+}
+.part-two{
+   
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+    background: linear-gradient(to left,#867f7f, #dbdbe2);
+   
+    
+}
+.back-btn{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
+.background{
+    display: grid;
+    grid-template-columns: 6fr 4fr;   
+    min-height: 100%;
+
+
+}

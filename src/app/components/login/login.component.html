@@ -1,10 +1,17 @@
 <div class="loginWindow">
-  <h1 mat-dialog-title>Přihlášení/Registrace</h1>
+  <h1 mat-dialog-title>Registrace</h1>
   <div mat-dialog-content>
-    <input class="loginInput" type="text" placeholder="Váš email">
+    <input class="loginInput" type="text" placeholder="Jméno">
+    <input class="loginInput" type="text" placeholder="Příjmení">
+    <input class="loginInput" type="text" placeholder="Email">
     <input class="loginInput" type="password" id="pass" name="password" placeholder="Heslo" minlength="8" required>
   </div>
   <div mat-dialog-actions>
-    <button class="loginBtn" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Přihlásit se</button>
+    <button routerLink="/profile" routerLinkActive="active" class="loginBtn" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Zaregistrovat se</button>
   </div>
 </div>
+
+<!--/
+Přihlášení
+Přihlásit se
+ -->

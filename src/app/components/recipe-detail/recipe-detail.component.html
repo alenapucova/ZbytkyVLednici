@@ -1,14 +1,33 @@
+<div class="background-detail">
+       
+    <div class="detail-part-one">
+            <app-header></app-header>
+        <div class="recipe">
+            <h1 class="title">{{recipe.title}}</h1>
+            <div class="description">
+                <h4 class="ingredients">Suroviny: </h4>
+                <ul *ngFor="let ingredient of recipe.ingredients">
+                    <li>{{ ingredient.name }}  {{getFullAmount(ingredient.amount)}} {{getUnitName(ingredient.unit)}}</li>
+                </ul>
+                <h4>Počet porcí: {{getPortions()}}</h4>
+                <h4>Postup: </h4>
+                <p class="progress">{{ recipe.progress }}</p>
+            </div>
+        </div>
+        <div class="btn-section">
+        <button mat-raised-button color="primary" class="back-btn button" routerLink="/home" routerLinkActive="active">Zpět na výpis receptů</button>
+    </div>
+    </div>
 
-<div class="recipe">
-        <h1 class="title">{{recipe.title}}</h1>
-        <div class="description">
-        <h4 class="ingredients">Suroviny: </h4>
-        
-        <ul>
-            <li>{{recipe.ingredients}}</li>
-        </ul>
-        <h4>Postup: </h4>
-        <p>{{recipe.progress}}</p>
+    <div class="detail-part-two">
+        <div class="recipe-detail">
+            <img class="recipe-detail-img" src="../../../assets/img/{{recipe.id}}max.jpg" alt="recipe-detail">
+        </div>
     </div>
 </div>
+
+<!--výčet dalších receptů
+ {{getUnitName(ingredient.unit)}}
+-->
+
 

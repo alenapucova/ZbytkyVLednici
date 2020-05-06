@@ -1,50 +1,73 @@
 $primary: #243665;
-$secondary:#8BD8BD;
+$secondary:rgb(184, 178, 178);
 
 ul.sideBar{
-        display: flex;
+       display: flex;
         flex-direction: row;
-        background-color: $primary;
-        width:100%;
-        height: 60px;
         justify-content: center;
-        margin-top:60px;
     li{
         list-style-type: none;
-        padding: 8px;
-        
-        .button{
-            width: 200px;
-            background-color: $secondary;
-            color: black;
-            
-        }
+       
     }
-    
-    
 }
-
-.mat-menu-content {
-   
+.sideBar{
+    position: relative;
+}
+.side-bar-btn{
+    width: 40px;
+    height: 40px;
+    margin: 0px 5px;
+    padding: 0px;
+    background-color: rgb(223, 219, 219);
+}
+.mat-menu-content {   
+    //text-align: center;
+    padding: 0px 20px;
+}
+.slider{
     text-align: center;
 }
+
 .mat-menu-panel{
+    position: absolute;
+    top: 30px;
+    right:100px;
+    width: 400px;
+    //max-width: 400px;
     background-color: $secondary;
-    margin-top: 20px;
-    width: 200px;
-    padding: 40px 0;
+    margin-top: 20px;    
+    padding: 20px 0px;
 }
 
 .tabcontent{
-    padding: 10px 0;
+    padding: 10px 0px;
     display: block;
     text-align: left;
 }
 input[type=checkbox]{
         float: left;
-        margin-left: 25px;
+       // margin-left: 25px;
         margin-right: 15px;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
 }
 .option{
     padding: 0 7px;
+}
+.side-bar-title{
+    font-size: 18px;
+    text-align: center;
+}
+.mat-tab-label {
+    min-width: 25px !important;
+    width: 25px !important;
+    padding: 5px;   
+    font-weight: 700;
+}
+.mat-tab-labels {
+    justify-content: center;
+}
+.mat-slider{
+    width: 40%;
 }

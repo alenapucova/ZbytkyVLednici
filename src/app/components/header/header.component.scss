@@ -7,13 +7,27 @@ $secondary:#8BD8BD;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-       
+    
+    position: absolute;
 }
-.login{
-    float: right;
-    background-color: $secondary;
-    color: black;
+.header-relative{
+
 }
+
 .logo{
     margin: 15px;
+    top:0;
+    left: 0;
+  
 }
+.login{
+    height: 35px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+.loginInput[_ngcontent-whd-c14] {
+    width: 80%;
+}
+

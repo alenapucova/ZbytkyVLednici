@@ -1,21 +1,31 @@
+<form class="example-form">
+  <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" name="Ingredient" [(ngModel)]="item"
+    placeholder="Sem zadejte suroviny...">
+  <input type="text" placeholder="Zadejte množství" name="amount" class="amount-input" [(ngModel)]="amount">
+  <div class="unit">{{chosenIngredient && getUnitName(chosenIngredient.unit)}}</div>
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event)">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option.name}}
+    </mat-option>
+  </mat-autocomplete>
+  <button mat-raised-button color="primary" (click)="addItem()" class="add-btn">Přidat surovinu</button>
+</form>
 
-
-<form class="example-form" >
-      <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" name="fridgeItem" #newItem (keyup.Enter)="addItem(newItem)">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option.singleIngredient}}
-        </mat-option>
-      </mat-autocomplete>
-      <button (click)="addItem(newItem)" class="ui button">Přidat surovinu</button>   
-  </form>
-
-
+<app-side-bar (criteriaChanged)="onCriteriaChanged($event)"></app-side-bar> 
 
 <div class="listOfItems">
-    <ul>
-        <li class="singleItem" *ngFor="let item of allItems" >{{item.title}}
-            <button (click)="deleteItem(item)" class="deleteBtn">x</button>
-        </li>
-    </ul>
+  <ul>
+    <li class="singleItem" *ngFor="let item of allItems">{{item.name}} {{item.amount}} {{getUnitName(item.unit)}}
+      <button (click)="deleteItem(item)" class="deleteBtn">x</button>
+    </li>
+  </ul>
 </div>
+
+<!--(optionSelected)="itemSelected($event)"
+(keyup.Enter)="addItem($event)"
+ <button (click)="addItem(newItem)" class="ui button">Přidat surovinu</button>  
+(keyup.Enter)="addItem(newItem)" 
+(optionSelected)="itemSelected($event)" udělat, aby po inputu skočil focus na množství, tuto metodu dám na btn
+
+{{item.getUnitName()}}
+-->

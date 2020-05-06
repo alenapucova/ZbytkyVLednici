@@ -1,41 +1,66 @@
-import { Recipe, Difficulty, FoodStyle } from './recipe';
-import { IngredientItem } from './ingredientItem';
+import { Recipe, Difficulty, FoodStyle, FoodType } from './recipe';
+import { Unit, Ingredient } from './models/ingredient.model';
 
 export const RECIPES: Recipe[] = [
     {
         id:1, 
         title: 'Míchaná vejce', 
-        ingredients:['vejce'],
-        progress: 'zamichat a smazit', 
-        time: 30,
-        difficulty: Difficulty.Easy, 
-        foodStyle: FoodStyle.GlutenFree
+        ingredients:[new Ingredient('vejce',2, Unit.Ks,3),new Ingredient('máslo',11, Unit.G,15)],
+        progress: 'Vejce rozklepneme do misky, přidáme sůl, pepř a metličkou promícháme. Pokud máme cibulku, zpěníme ji na pánvi na másle, pokud ne, vynecháme ji a na pořádně ropálenou pánev s rezehřátým máslem nalijeme vaječnou směs. Několikrát prochíchneme, sstáhneme z plamene a necháme dojít, aby vejce nebyla vysušená. Ozdobit můžeme pažitkou.', 
+        time: 10,
+        difficulty: [Difficulty.Easy], 
+        foodStyle: [FoodStyle.GlutenFree,FoodStyle.NoMeat,FoodStyle.LowCarb],
+        foodType: [FoodType.Breakfast],
     },
     {
         id:2, 
-        title: 'Testoviny', 
-        ingredients: ['testoviny', 'pesto'],
-        progress: 'zamichat a smazit', 
-        time: 20,
-        difficulty: Difficulty.Medium, 
-        foodStyle: FoodStyle.NoMeat
+        title: 'Těstoviny s bazalkovým pestem', 
+        ingredients: [new Ingredient('těstoviny',3, Unit.G, 90), new Ingredient('bazalkové pesto',8,  Unit.G, 30)],
+        progress: 'Do hrnce dáme vařit vodu, kterou osolíme. Jakmile se voda začne vařit, vložíme do ní těstoviny, necháme je 1–2 minuty zavařit a opatrně je promícháme. Těstoviny uvaříme podle návodu na skus, poté je slijeme a 100 ml vody dáme stranou. Pesto vlijeme na studenou pánev nebo do mísy a přidáme uvařené těstoviny a 2–3 lžíce vody, ve které se těstoviny vařili. Promícháme a přendáme na talíř. Na talíři těstoviny můžeme posypat piniovými oříšky a parmazánem nebo pecorinem.', 
+        time: 10,
+        difficulty: [Difficulty.Easy], 
+        foodStyle:[FoodStyle.NoMeat],
+        foodType: [FoodType.MainMeal],
     },
     {
         id:3, 
-        title: 'Chleba s maslem', 
-        ingredients: ['chleba', 'maslo'],
-        progress: 'zamichat a smazit', 
-        time: 10,difficulty: 
-        Difficulty.Difficult, 
-        foodStyle: FoodStyle.LowCarb
+        title: 'Dýňová polévka', 
+        ingredients: [new Ingredient('dýně', 9, Unit.G, 250), new Ingredient('smetana', 6,  Unit.Ml, 100),new Ingredient('cibule', 7,  Unit.Ks, 1)],
+        progress: 'Oloupanou cibuli nakrájíme na kostičky a osmahneme dozlatova na oleji. Přidáme na kostičky nakrájenou dýni a zalijeme vývarem, nebo vodou. Necháme 20 minut povařit, dokud dýně nezměkne. Po uvaření polévku odstavíme a necháme vychladnout. Dýňovou polévku rozmixujeme a ochutíme pepřem, solí, a smetanou. Vše dáme zpět na mírný oheň a ještě chviličku povaříme. Výbornou dýňovou polévku podáváme se lžičkou kysané smetany a na talířku zdobíme čerstvou pažitkou a nasekanou bazalkou.',  
+        time: 40,
+        difficulty: [Difficulty.Easy],
+        foodStyle: [FoodStyle.LowCarb,FoodStyle.NoMeat],
+        foodType: [FoodType.Soup],
     }, 
+    
     {
         id:4, 
-        title: 'Brambory', 
-        ingredients: ['brambory', 'kuřecí maso'],
-        progress: 'zamichat a smazit', 
-        time: 50,
-        difficulty: Difficulty.Easy, 
-        foodStyle: FoodStyle.NoMeat
-    },   
+        title: 'Zapečené brambory se smetanou a cibulí', 
+        ingredients: [new Ingredient('brambory',10, Unit.G, 150),new Ingredient('máslo',11, Unit.G,15),new Ingredient('smetana', 6,  Unit.Ml, 50),new Ingredient('stroužek česneku', 12,  Unit.Ks, 2),new Ingredient('strouhaný sýr', 13,  Unit.G, 20)],
+        progress: 'Brambory nakrájíme na tenká kolečka a vyskládáme jimi vymazaný pekáč. Smícháme smetanu, utřené stroužky česneku, sůl a pepř. Směsí zalijeme brambory. Vrch posypeme cibulí pokrájenou na kolečka, tymiánem a strouhaným sýrem. Brambory pečeme při 170 °C 45 minut.  ', 
+        time: 60,
+        difficulty: [Difficulty.Easy], 
+        foodStyle: [FoodStyle.NoMeat],
+        foodType: [FoodType.MainMeal],
+    }, 
+    {
+        id:5, 
+        title: 'Kuskus s kuřecím masem a zeleninou', 
+        ingredients: [new Ingredient('kuřecí maso', 5, Unit.G, 100), new Ingredient('kuskus',14, Unit.G, 50),new Ingredient('zelenina',15, Unit.G, 40)],
+        progress: 'Kuřecí prso nakrájejte na kostičky, osolte a opepřete. Mezitím přiveďte vodu v hrnci k varu. Maso vhoďte na pánev a smažte ideálně na 1 polévkové lžíci olivového oleje. Směs zeleniny přidejte do vařicí vody a nechte cca 15 minut (dokud zcela nezměkne). Kuskus nasypte do misky a promíchejte s lžičkou olivového (slunečnicového) oleje. Ve varné konvici či v hrnci přiveďte k varu vodu o objemu přibližně 2,5 násobku množství kuskusu (v tomto případě 125 ml). Pro lepší chuť můžete použít vývar z ryb, masa nebo zeleniny. Až se bude voda svaří, zalijte kuskus, vidličkou promíchejte a přikryjte pokličkou, dokud se voda zcela nevsákne (cca 3 minuty). Dbejte na to, aby zůstala zrníčka oddělená. Opečené kuřecí kousky smíchejte se zeleninou, na mírném ohni promíchejte. Nakonec na pánev přidejte kuskusovou směs a vše důkladně promíchejte. Navrch můžete přidat jogurt nebo zakysanou smetanu. ', 
+        time: 30,
+        difficulty: [Difficulty.Medium], 
+        foodStyle: [FoodStyle.GlutenFree],
+        foodType: [FoodType.MainMeal],
+    },
+    {
+        id:6, 
+        title: 'Smažená rýže', 
+        ingredients: [new Ingredient('rýže', 4, Unit.G, 50),new Ingredient('sojová omáčka', 16,  Unit.Ml, 20),new Ingredient('zelenina',15, Unit.G, 40),new Ingredient('vejce',2, Unit.Ks,2)],
+        progress: 'Uvaříme rýži do poloměkka. Na pánvi wok rozpálíme olej a přidáme rýži. Přelijte sojovou omáčkou a smažte chvilku za stálého míchání. Přidejte rozšlehaná vejce a chvíli míchejte. Pak přidejte zeleninu a nechte ji řádně prohřát. Podávejte jako přílohu, ale rozhodně neodoláte ji jíst samotnou.', 
+        time: 35,
+        difficulty: [Difficulty.Medium], 
+        foodStyle: [FoodStyle.NoMeat,FoodStyle.GlutenFree],
+        foodType: [FoodType.MainMeal],
+    },  
 ];

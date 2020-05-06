@@ -1,20 +1,32 @@
+import { Ingredient } from '../app/models/ingredient.model';
+
 export interface Recipe {
     id : number;
     title : string;
-    ingredients : string[];
+    ingredients : Ingredient [];
     progress : string; 
     time: number;
-    difficulty: Difficulty;
-    foodStyle: FoodStyle;
+    difficulty: Difficulty[];
+    foodStyle: FoodStyle[];
+    foodType: FoodType[];
 
 }
 export enum Difficulty {
-    Easy, 
-    Medium, 
-    Difficult
+    Easy = 1, 
+    Medium = 2, 
+    Difficult = 3
 }
-export enum FoodStyle{
-    LowCarb,
-    NoMeat,
-    GlutenFree,
+export enum FoodStyle {
+    NoMeat = 1,
+    LowCarb = 2,    
+    GlutenFree = 3,
+    None = 0
+}
+export enum FoodType {
+    MainMeal = 1,
+    Soup = 2,
+    Dezert = 3,
+    Snack = 4,
+    Breakfast = 5
+
 }

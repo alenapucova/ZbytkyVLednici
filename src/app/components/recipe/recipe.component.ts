@@ -1,26 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Recipe, Difficulty, FoodStyle } from '../../recipe';
-import { RecipeService } from '../../recipe.service';
+import { Ingredient } from 'src/app/models/ingredient.model';
 
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss']
 })
-export class RecipeComponent implements OnInit {
+export class RecipeComponent {
 
-  recipes: Recipe[];
+  @Input() recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  noGluten: string = "../../../assets/img/wheat.svg";
+  noMeat: string = "../../../assets/img/nomeat.svg";
+  lowCarb: string = "../../../assets/img/lc.svg";
+  none: string = "";
 
-  getRecipes(): void {
-    this.recipes = this.recipeService.getRecipes(null);
-  }
-  ngOnInit() {
-    this.getRecipes()
-  }
-  
   getDifficulty(difficulty: Difficulty){
     if(difficulty === Difficulty.Easy){
       return "Snadné"
@@ -30,14 +26,15 @@ export class RecipeComponent implements OnInit {
       return "Náročné"
     }    
   }
-  getFoodStyle(foodStyle: FoodStyle){
+  getFoodStyle(foodStyle: FoodStyle): string{
     if(foodStyle === FoodStyle.GlutenFree){
-      return "Bez lepku"
+      return this.noGluten
     } else if (foodStyle === FoodStyle.LowCarb){
-      return "Low Carb"
+      return this.lowCarb
     } else if (foodStyle === FoodStyle.NoMeat) {
-      return "Bez masa"
-    }    
+      return this.noMeat
+    } else if (foodStyle === FoodStyle.None) {
+      return this.none
+    }     
   }
- 
 }

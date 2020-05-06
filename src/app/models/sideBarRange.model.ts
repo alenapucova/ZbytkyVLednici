@@ -5,12 +5,16 @@ export class SideBarRange extends SideBarItem{
     min: number;
     max: number;
     def: number;
+    path:string;
+    value:number;
 
-    constructor(title:string,min:number,max:number,def:number ) {
-        super(title,SideBarItemType.Range);
+    constructor(title:string,min:number,max:number,def:number, path:string ) {
+        super(title,SideBarItemType.Range, path);
         this.title = title;
         this.min = min;
         this.max = max;
         this.def = def;
+        this.path = path;
+        this.value = def;
     }
 }
