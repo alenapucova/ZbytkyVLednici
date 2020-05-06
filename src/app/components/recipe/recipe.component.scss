@@ -83,9 +83,21 @@ h4{
     display: block;
 }
 #no-recipes{
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 mat-card-header{
     display: flex;
     justify-content: space-between;
+}
+.not-success{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 150px;
+    font-family: 'Gotu', sans-serif;
+     
+}
+a{
+   text-align: center;
 }

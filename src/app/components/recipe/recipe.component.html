@@ -8,12 +8,13 @@
         <div *ngFor="let recipe of recipes" class="recipe">
 
             <mat-card class="recipe-card" routerLink="/detail/{{recipe.id}}" routerLinkActive="active">
-                <img mat-card-image src="../../../assets/img/{{recipe.id}}min.jpg" alt="recipe-pic" >
-               <!-- <i class="fa fa-heart fa-2x like" aria-hidden="true"></i>-->
+                <img mat-card-image src="../../../assets/img/{{recipe.id}}min.jpg" alt="recipe-pic">
+                <!-- <i class="fa fa-heart fa-2x like" aria-hidden="true"></i>-->
                 <mat-card-header>
                     <mat-card-title>{{recipe.title}}</mat-card-title>
                     <div class="food-styles">
-                        <img *ngFor="let foodstyle of recipe.foodStyle" class="food-style" src="{{getFoodStyle(foodstyle)}}" alt="foodstyle">
+                        <img *ngFor="let foodstyle of recipe.foodStyle" class="food-style"
+                            src="{{getFoodStyle(foodstyle)}}" alt="foodstyle">
                     </div>
                 </mat-card-header>
 
@@ -22,7 +23,7 @@
                         routerLinkActive="active" class="details">Podrobnosti</button>
 
                 </mat-card-actions>
-           </mat-card>
+            </mat-card>
         </div>
 
     </div>
@@ -31,7 +32,8 @@
 <ng-template #no_recipes>
 
     <div id="no-recipes">
-
+        <h1 class="not-success">Z toho nic neuvaříš, zkus ještě prohledat spíž a nebo si objednej něco až domů</h1>
+        <a href="https://www.damejidlo.cz" clas="damejidlo"> <img  src="../../../assets/img/dj.png" alt="dame-jidlo"></a>
     </div>
 
 

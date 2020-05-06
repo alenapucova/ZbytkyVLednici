@@ -6,7 +6,7 @@ export const RECIPES: Recipe[] = [
         id:1, 
         title: 'Míchaná vejce', 
         ingredients:[new Ingredient('vejce',2, Unit.Ks,3),new Ingredient('máslo',11, Unit.G,15)],
-        progress: 'Vejce rozklepneme do misky, přidáme sůl, pepř a metličkou promícháme. Pokud máme cibulku, zpěníme ji na pánvi na másle, pokud ne, vynecháme ji a na pořádně ropálenou pánev s rezehřátým máslem nalijeme vaječnou směs. Několikrát prochíchneme, sstáhneme z plamene a necháme dojít, aby vejce nebyla vysušená. Ozdobit můžeme pažitkou.', 
+        progress: 'Vejce rozklepneme do misky, přidáme sůl, pepř a metličkou promícháme. Pokud máme cibulku, zpěníme ji na pánvi na másle, pokud ne, vynecháme ji a na pořádně ropálenou pánev s rezehřátým máslem nalijeme vaječnou směs. Několikrát prochíchneme, stáhneme z plamene a necháme dojít, aby vejce nebyla vysušená. Ozdobit můžeme pažitkou.', 
         time: 10,
         difficulty: [Difficulty.Easy], 
         foodStyle: [FoodStyle.GlutenFree,FoodStyle.NoMeat,FoodStyle.LowCarb],
@@ -29,7 +29,7 @@ export const RECIPES: Recipe[] = [
         progress: 'Oloupanou cibuli nakrájíme na kostičky a osmahneme dozlatova na oleji. Přidáme na kostičky nakrájenou dýni a zalijeme vývarem, nebo vodou. Necháme 20 minut povařit, dokud dýně nezměkne. Po uvaření polévku odstavíme a necháme vychladnout. Dýňovou polévku rozmixujeme a ochutíme pepřem, solí, a smetanou. Vše dáme zpět na mírný oheň a ještě chviličku povaříme. Výbornou dýňovou polévku podáváme se lžičkou kysané smetany a na talířku zdobíme čerstvou pažitkou a nasekanou bazalkou.',  
         time: 40,
         difficulty: [Difficulty.Easy],
-        foodStyle: [FoodStyle.LowCarb,FoodStyle.NoMeat],
+        foodStyle: [FoodStyle.LowCarb,FoodStyle.NoMeat,FoodStyle.GlutenFree],
         foodType: [FoodType.Soup],
     }, 
     
@@ -50,7 +50,7 @@ export const RECIPES: Recipe[] = [
         progress: 'Kuřecí prso nakrájejte na kostičky, osolte a opepřete. Mezitím přiveďte vodu v hrnci k varu. Maso vhoďte na pánev a smažte ideálně na 1 polévkové lžíci olivového oleje. Směs zeleniny přidejte do vařicí vody a nechte cca 15 minut (dokud zcela nezměkne). Kuskus nasypte do misky a promíchejte s lžičkou olivového (slunečnicového) oleje. Ve varné konvici či v hrnci přiveďte k varu vodu o objemu přibližně 2,5 násobku množství kuskusu (v tomto případě 125 ml). Pro lepší chuť můžete použít vývar z ryb, masa nebo zeleniny. Až se bude voda svaří, zalijte kuskus, vidličkou promíchejte a přikryjte pokličkou, dokud se voda zcela nevsákne (cca 3 minuty). Dbejte na to, aby zůstala zrníčka oddělená. Opečené kuřecí kousky smíchejte se zeleninou, na mírném ohni promíchejte. Nakonec na pánev přidejte kuskusovou směs a vše důkladně promíchejte. Navrch můžete přidat jogurt nebo zakysanou smetanu. ', 
         time: 30,
         difficulty: [Difficulty.Medium], 
-        foodStyle: [FoodStyle.GlutenFree],
+        foodStyle: [],
         foodType: [FoodType.MainMeal],
     },
     {
