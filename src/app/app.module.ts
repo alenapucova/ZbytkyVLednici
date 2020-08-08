@@ -40,6 +40,7 @@ import { UserService } from "./user.service";
 import { RegisterComponent } from "./components/register/register.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { AuthGuard } from "./guards/auth.guard";
+import { IngredientsService } from "./ingredients.service";
 
 const appRoutes: Routes = [
   { path: "detail/:id", component: RecipeDetailComponent },
@@ -99,7 +100,8 @@ const appRoutes: Routes = [
     { provide: MAT_DIALOG_DATA, useValue: [] },
     StorageService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    IngredientsService
   ],
   bootstrap: [AppComponent]
 })

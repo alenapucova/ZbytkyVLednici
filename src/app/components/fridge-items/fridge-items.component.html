@@ -1,21 +1,43 @@
 <form class="example-form">
-  <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" name="Ingredient" [(ngModel)]="item"
-    placeholder="Sem zadejte suroviny...">
-  <input type="text" placeholder="Zadejte množství" name="amount" class="amount-input" [(ngModel)]="amount">
-  <div class="unit">{{chosenIngredient && getUnitName(chosenIngredient.unit)}}</div>
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event)">
+  <input
+    type="text"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    name="Ingredient"
+    [(ngModel)]="item"
+    placeholder="Sem zadejte suroviny..."
+  />
+  <input
+    type="text"
+    placeholder="Zadejte množství"
+    name="amount"
+    class="amount-input"
+    [(ngModel)]="amount"
+  />
+  <div class="unit">
+    {{ chosenIngredient && getUnitName(chosenIngredient.unit) }}
+  </div>
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="itemSelected($event)"
+  >
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-      {{option.name}}
+      {{ option.name }}
     </mat-option>
   </mat-autocomplete>
-  <button mat-raised-button color="primary" (click)="addItem()" class="add-btn">Přidat surovinu</button>
+  <button mat-raised-button color="primary" (click)="addItem()" class="add-btn">
+    Přidat surovinu
+  </button>
 </form>
 
-<app-side-bar (criteriaChanged)="onCriteriaChanged($event)"></app-side-bar> 
+<app-side-bar (criteriaChanged)="onCriteriaChanged($event)"></app-side-bar>
 
 <div class="listOfItems">
   <ul>
-    <li class="singleItem" *ngFor="let item of allItems">{{item.name}} {{item.amount}} {{getUnitName(item.unit)}}
+    <li class="singleItem" *ngFor="let item of chosenIngredients">
+      {{ item.name }} {{ item.amount }} {{ getUnitName(item.unit) }}
       <button (click)="deleteItem(item)" class="deleteBtn">x</button>
     </li>
   </ul>

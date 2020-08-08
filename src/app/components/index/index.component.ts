@@ -12,8 +12,8 @@ import { Criteria } from "src/app/models/criteria.model";
   styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements OnInit {
-  recipes: Recipe[] = [];
-  recipe;
+  allRecipes: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
 
   selectedIngredients: Ingredient[];
   selectedCriteria: Criteria;
@@ -21,17 +21,18 @@ export class IndexComponent implements OnInit {
   constructor(private recipeService: RecipeService, public dialog: MatDialog) {}
 
   ngOnInit() {
-  
-    this.recipeService
-      .getRecipes(this.selectedIngredients, this.selectedCriteria)
-      .subscribe(recipes => {
-        console.log("recipes", recipes);
-        this.recipes = recipes;
-      });
+    this.recipeService.getRecipes().subscribe(recipes => {
+      console.log("recipes", recipes);
+      this.allRecipes = recipes;
+      this.onChange();
+    });
   }
 
   onIngredientChange(ingredients: Ingredient[]) {
-    console.log(ingredients.map(ingredient => ingredient.name));
+    console.log(
+      "selected ingredients",
+      ingredients.map(ingredient => ingredient.name)
+    );
     this.selectedIngredients = ingredients;
     this.onChange();
   }
@@ -41,8 +42,10 @@ export class IndexComponent implements OnInit {
   }
 
   onChange() {
-    this.recipeService
-      .getRecipes(this.selectedIngredients, this.selectedCriteria)
-      .subscribe(recipes => (this.recipes = recipes));
+    this.filteredRecipes = this.recipeService.getFilteredRecipes(
+      this.allRecipes,
+      this.selectedIngredients,
+      this.selectedCriteria
+    );
   }
 }

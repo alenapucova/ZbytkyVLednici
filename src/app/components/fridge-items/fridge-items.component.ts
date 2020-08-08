@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  ElementRef,
   Output,
   EventEmitter
 } from "@angular/core";
@@ -15,11 +13,8 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
-import { SideBarItem } from "src/app/models/sideBar-item.model";
-import { NameAndValue } from "src/app/models/name-and-value.model";
 import { Criteria } from "src/app/models/criteria.model";
-import { StorageService } from "src/app/storage.service";
-import { all } from "q";
+import { IngredientsService } from "src/app/ingredients.service";
 
 @Component({
   selector: "app-fridge-items",
@@ -33,34 +28,24 @@ export class FridgeItemsComponent implements OnInit {
   chosenIngredient: Ingredient;
   input: string;
   selectedOption: string = "";
-  allItems: Ingredient[] = new Array<Ingredient>();
+  chosenIngredients: Ingredient[] = new Array<Ingredient>();
   amount: number;
   item: string;
   myControl = new FormControl();
 
-  options: Ingredient[] = [
-    new Ingredient("mléko", 1, Unit.Ml),
-    new Ingredient("vejce", 2, Unit.Ks),
-    new Ingredient("těstoviny", 3, Unit.G),
-    new Ingredient("rýže", 4, Unit.G),
-    new Ingredient("kuřecí maso", 5, Unit.G),
-    new Ingredient("smetana", 6, Unit.Ml),
-    new Ingredient("cibule", 7, Unit.Ks),
-    new Ingredient("bazalkové pesto", 8, Unit.G),
-    new Ingredient("dýně", 9, Unit.G),
-    new Ingredient("brambory", 10, Unit.G),
-    new Ingredient("máslo", 11, Unit.G),
-    new Ingredient("stroužek česneku", 12, Unit.Ks),
-    new Ingredient("strouhaný sýr", 13, Unit.G),
-    new Ingredient("kuskus", 14, Unit.G),
-    new Ingredient("zelenina", 15, Unit.G),
-    new Ingredient("sojová omáčka", 16, Unit.Ml)
-  ];
+  options: Ingredient[] = [];
+
   filteredOptions: Observable<Ingredient[]>;
 
+  constructor(private ingredientService: IngredientsService) {}
+
   ngOnInit() {
-    this.upDateOptions();
     this.loadLocalStorage();
+    this.ingredientService.getIngredients().subscribe(ingredients => {
+      this.options = ingredients;
+      console.log("options", this.options);
+      this.upDateOptions();
+    });
   }
 
   displayFn(ingredient: Ingredient): string {
@@ -94,18 +79,19 @@ export class FridgeItemsComponent implements OnInit {
       if (this.isNumber(this.amount)) {
         //zkontrolovat, ze amount je číslo
         //pridani suroviny do seznamu
-        this.allItems.push(this.chosenIngredient);
-        console.log("ingredience", this.chosenIngredient.id);
+        this.chosenIngredients.push(this.chosenIngredient);
+        console.log("ingredience", this.chosenIngredient._id);
         //vymazani suroviny z nabidky
-        this.removeOption(this.options, this.chosenIngredient.id);
+        this.removeOption(this.options, this.chosenIngredient._id);
         //po pridani surovin vymazat input pole
         this.amount = null;
         this.item = "";
         this.chosenIngredient = null;
 
-        this.ingredientsChanged.emit(this.allItems);
+        this.ingredientsChanged.emit(this.chosenIngredients);
 
-        localStorage.setItem("items", JSON.stringify(this.allItems));
+        localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+        this.upDateOptions();
       } else {
         console.log("not a number");
       }
@@ -113,23 +99,23 @@ export class FridgeItemsComponent implements OnInit {
   }
 
   deleteItem(item: Ingredient) {
-    const index: number = this.allItems.indexOf(item);
+    const index: number = this.chosenIngredients.indexOf(item);
     if (index !== -1) {
-      this.allItems.splice(index, 1);
-      this.ingredientsChanged.emit(this.allItems);
+      this.chosenIngredients.splice(index, 1);
+      this.ingredientsChanged.emit(this.chosenIngredients);
       this.options.push(item);
       this.upDateOptions();
     }
-    localStorage.setItem("items", JSON.stringify(this.allItems));
+    localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
   }
 
   isNumber(n) {
     return !isNaN(parseFloat(n)) && !isNaN(n - 0);
   }
 
-  removeOption(options: Ingredient[], id: number) {
+  removeOption(options: Ingredient[], id: string) {
     for (let i = 0; i < options.length; i++) {
-      if (options[i].id === id) {
+      if (options[i]._id === id) {
         options.splice(i--, 1);
       }
     }
@@ -155,8 +141,8 @@ export class FridgeItemsComponent implements OnInit {
     //console.log(this.criteriaChanged)
 
     if (localStoreItems) {
-      this.allItems = localStoreItems as Ingredient[];
-      this.ingredientsChanged.emit(this.allItems);
+      this.chosenIngredients = localStoreItems as Ingredient[];
+      this.ingredientsChanged.emit(this.chosenIngredients);
     }
     // if(localStoreCriteria) {
     // this.criteriaChanged = localStoreCriteria;
@@ -166,7 +152,7 @@ export class FridgeItemsComponent implements OnInit {
 
     //this.allItems = (JSON.parse(localStorage.getItem("items")) as Ingredient[]);
     //this.ingredientsChanged.emit(this.allItems);
-    console.log(this.allItems);
+    console.log(this.chosenIngredients);
 
     //localStorage.clear()
   }
