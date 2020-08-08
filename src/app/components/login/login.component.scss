@@ -1,60 +1,84 @@
 $primary: #243665;
-$secondary:#8BD8BD;
+$secondary: #8bd8bd;
 $ligh-bg: rgb(214, 211, 211);
 
-
-
-.loginInput{
-    //width: 80%;
-    height: 40px;
-    margin-bottom: 5px;
-    //border: 1px solid $primary;
-    border-radius: 5px;
-
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
-.loginBtn{
-    width: 200px;
-    background-color: $secondary;
-    color: black;
-    text-align: center;
-    border-radius: 35px;
-    box-shadow: none;
-    height: 50px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 20px auto 0px auto;
 
-   
+.example-full-width {
+  width: 80%;
 }
-button:hover{
-    background-color:$primary;
-    color: white;
+.loginBtn {
+  width: 200px;
+  background-color: $secondary;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: none;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 20px auto 40px auto;
 }
-.loginWindow{
-    height: 450px;
-    
+.registerBtn {
+  height: 35px;
+  width: 170px;
+  background-color: $secondary;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 20px auto 0px auto;
+}
+button:hover {
+  background-color: $primary;
+  color: white;
+}
+.loginWindow {
+  padding: 0px;
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 450px;
+  column-gap: 0px;
 }
 ::placeholder {
-    padding-left: 10px;
-  }
-
-input{
-    //padding-left: 10px;
+  padding-left: 10px;
 }
-mat-dialog-container .mat-dialog-container{
-    //overflow: hidden;
-   // width: 80%;
-   // margin: auto;
 
-}
 .mat-dialog-title {
-    text-align: center;
+  text-align: center;
 }
-.mat-dialog-content{
-    margin:0px;
-    padding: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.mat-dialog-content {
+  margin: 0px;
+  padding: 0px;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+}
+
+.mat-dialog-container {
+  padding: 0px;
+}
+
+.img-container {
+  background: linear-gradient(#315c30, #9bf0b7);
+}
+.login-container {
+  background-color: rgb(206, 235, 203);
+  padding: 20px;
+}
+.mat-dialog-actions {
+  display: flex;
+  flex-direction: column;
+}
+h4 {
+  margin-bottom: 0px;
 }

@@ -4,12 +4,31 @@
       <img src="../../../assets/img/logo.png" alt="recipe-detail" />
     </h1>
     <button
+      *ngIf="!userService.loggedIn()"
       mat-raised-button
       color="primary"
-      (click)="openDialog()"
+      (click)="openLoginDialog()"
       class="login ui button"
     >
       Přihlášení/Registrace
+    </button>
+    <button
+      *ngIf="userService.loggedIn()"
+      mat-raised-button
+      color="primary"
+      class="login ui button"
+      (click)="logoutUser()"
+    >
+      Odhlásit se
+    </button>
+    <button
+      *ngIf="userService.loggedIn()"
+      mat-raised-button
+      color="primary"
+      routerLink="/profile"
+      routerLinkActive="active"
+    >
+      Profil
     </button>
   </div>
 </div>

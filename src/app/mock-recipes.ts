@@ -1,4 +1,4 @@
-import { Recipe, Difficulty, FoodStyle, FoodType } from './recipe';
+/*import { Recipe, Difficulty, FoodStyle, FoodType } from './recipe';
 import { Unit, Ingredient } from './models/ingredient.model';
 
 export const RECIPES: Recipe[] = [
@@ -63,4 +63,4 @@ export const RECIPES: Recipe[] = [
         foodStyle: [FoodStyle.NoMeat,FoodStyle.GlutenFree],
         foodType: [FoodType.MainMeal],
     },  
-];
+];*/

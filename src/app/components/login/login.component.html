@@ -1,34 +1,54 @@
 <div class="loginWindow">
-  <h1 mat-dialog-title>Registrace</h1>
-  <div mat-dialog-content>
-    <input class="loginInput" type="text" placeholder="Jméno" />
-    <input class="loginInput" type="text" placeholder="Příjmení" />
-    <input class="loginInput" type="text" placeholder="Email" />
-    <input
-      class="loginInput"
-      type="password"
-      id="pass"
-      name="password"
-      placeholder="Heslo"
-      minlength="8"
-      required
-    />
+  <div class="login-container">
+    <h1 mat-dialog-title>Přihlášení</h1>
+    <div mat-dialog-content>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="email@gmail.com"
+          value=""
+          required
+          name="email"
+          [(ngModel)]="email"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Heslo</mat-label>
+        <input
+          matInput
+          value=""
+          minlength="8"
+          required
+          type="password"
+          id="pass"
+          name="password"
+          [(ngModel)]="password"
+        />
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button
+        (click)="loginUser()"
+        routerLinkActive="active"
+        class="loginBtn"
+        mat-button
+        cdkFocusInitial
+      >
+        Přihlásit se
+      </button>
+      <h4>Ještě nemáte účet?</h4>
+      <button
+        (click)="openRegisterDialog()"
+        routerLinkActive="active"
+        class="registerBtn"
+        mat-button
+        [mat-dialog-close]="data.animal"
+        cdkFocusInitial
+      >
+        Zaregistrovat se
+      </button>
+    </div>
   </div>
-  <div mat-dialog-actions>
-    <button
-      routerLink="/profile"
-      routerLinkActive="active"
-      class="loginBtn"
-      mat-button
-      [mat-dialog-close]="data.animal"
-      cdkFocusInitial
-    >
-      Zaregistrovat se
-    </button>
-  </div>
+  <div class="img-container"></div>
 </div>
-
-<!--/
-Přihlášení
-Přihlásit se
- -->

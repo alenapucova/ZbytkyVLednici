@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
-import { Recipe, Difficulty, FoodStyle } from '../../recipe';
-import { Ingredient } from 'src/app/models/ingredient.model';
+import { Recipe, Difficulty, FoodStyle } from "../../recipe";
+import { Ingredient } from "src/app/models/ingredient.model";
+import { UserService } from "src/app/user.service";
 
 @Component({
-  selector: 'app-recipe',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.scss']
+  selector: "app-recipe",
+  templateUrl: "./recipe.component.html",
+  styleUrls: ["./recipe.component.scss"]
 })
 export class RecipeComponent {
-
   @Input() recipes: Recipe[];
 
   noGluten: string = "../../../assets/img/wheat.svg";
@@ -17,24 +17,27 @@ export class RecipeComponent {
   lowCarb: string = "../../../assets/img/lc.svg";
   none: string = "";
 
-  getDifficulty(difficulty: Difficulty){
-    if(difficulty === Difficulty.Easy){
-      return "Snadné"
-    } else if (difficulty === Difficulty.Medium){
-      return "Středně obtížné"
-    } else if (difficulty === Difficulty.Difficult) {
-      return "Náročné"
-    }    
+  constructor(public userService: UserService) {}
+
+  getDifficulty(difficulty: Difficulty) {
+    if (difficulty.toString() === "Easy") {
+      return "Snadné";
+    } else if (difficulty.toString() === "Medium") {
+      return "Středně obtížné";
+    } else if (difficulty.toString() === "Difficult") {
+      return "Náročné";
+    }
   }
-  getFoodStyle(foodStyle: FoodStyle): string{
-    if(foodStyle === FoodStyle.GlutenFree){
-      return this.noGluten
-    } else if (foodStyle === FoodStyle.LowCarb){
-      return this.lowCarb
-    } else if (foodStyle === FoodStyle.NoMeat) {
-      return this.noMeat
-    } else if (foodStyle === FoodStyle.None) {
-      return this.none
-    }     
+  getFoodStyle(foodStyle: FoodStyle): string {
+    console.warn("foodstyle type", typeof foodStyle);
+    if (foodStyle.toString() === "GlutenFree") {
+      return this.noGluten;
+    } else if (foodStyle.toString() === "LowCarb") {
+      return this.lowCarb;
+    } else if (foodStyle.toString() === "NoMeat") {
+      return this.noMeat;
+    } else if (foodStyle.toString() === "None") {
+      return this.none;
+    }
   }
 }

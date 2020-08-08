@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
+import { HttpClientModule } from "@angular/common/http";
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { SideBarComponent } from "./components/side-bar/side-bar.component";
@@ -11,7 +13,11 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSliderModule } from "@angular/material/slider";
 import { SideBarRangeComponent } from "./components/side-bar-range/side-bar-range.component";
 import { SideBarCheckboxComponent } from "./components/side-bar-checkbox/side-bar-checkbox.component";
-import { MatDialogModule } from "@angular/material/dialog";
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
 import {
   MatInputModule,
   MatFormFieldModule,
@@ -31,11 +37,16 @@ import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { StorageService } from "./storage.service";
 import { UserService } from "./user.service";
+import { RegisterComponent } from "./components/register/register.component";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { AuthGuard } from "./guards/auth.guard";
 
 const appRoutes: Routes = [
   { path: "detail/:id", component: RecipeDetailComponent },
   { path: "home", component: IndexComponent },
-  { path: "profile", component: ProfileComponent },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
   { path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 
@@ -51,11 +62,13 @@ const appRoutes: Routes = [
     RecipeComponent,
     RecipeDetailComponent,
     IndexComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatSliderModule,
@@ -73,11 +86,21 @@ const appRoutes: Routes = [
     MatCardModule,
     MatExpansionModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
 
   entryComponents: [LoginComponent],
-  providers: [StorageService, UserService],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
+    StorageService,
+    UserService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

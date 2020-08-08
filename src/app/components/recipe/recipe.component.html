@@ -1,40 +1,61 @@
 <div class="recipe-block">
+  <h2 *ngIf="recipes && recipes.length > 0; else no_recipes">
+    Nalezené recepty
+  </h2>
 
-    <h2 *ngIf="recipes && recipes.length > 0;else no_recipes">Nalezené recepty</h2>
+  <div class="recipe-list">
+    <div *ngFor="let recipe of recipes" class="recipe">
+      <mat-card
+        class="recipe-card"
+        routerLink="/detail/{{ recipe._id }}"
+        routerLinkActive="active"
+      >
+        <img
+          mat-card-image
+          src="../../../assets/img/{{ recipe._id }}min.jpg"
+          alt="recipe-pic"
+        />
+        <i
+          class="fa fa-heart fa-2x like"
+          aria-hidden="true"
+          *ngIf="userService.loggedIn()"
+        ></i>
+        <mat-card-header>
+          <mat-card-title>{{ recipe.title }}</mat-card-title>
+          <div *ngIf="recipe.foodStyle" class="food-styles">
+            <img
+              *ngFor="let foodstyle of recipe.foodStyle"
+              class="food-style"
+              src="{{ getFoodStyle(foodstyle) }}"
+              alt="foodstyle"
+            />
+          </div>
+        </mat-card-header>
 
-
-    <div class="recipe-list">
-
-        <div *ngFor="let recipe of recipes" class="recipe">
-
-            <mat-card class="recipe-card" routerLink="/detail/{{recipe.id}}" routerLinkActive="active">
-                <img mat-card-image src="../../../assets/img/{{recipe.id}}min.jpg" alt="recipe-pic">
-                <!-- <i class="fa fa-heart fa-2x like" aria-hidden="true"></i>-->
-                <mat-card-header>
-                    <mat-card-title>{{recipe.title}}</mat-card-title>
-                    <div class="food-styles">
-                        <img *ngFor="let foodstyle of recipe.foodStyle" class="food-style"
-                            src="{{getFoodStyle(foodstyle)}}" alt="foodstyle">
-                    </div>
-                </mat-card-header>
-
-                <mat-card-actions>
-                    <button mat-raised-button color="secondary" routerLink="/detail/{{recipe.id}}"
-                        routerLinkActive="active" class="details">Podrobnosti</button>
-
-                </mat-card-actions>
-            </mat-card>
-        </div>
-
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="secondary"
+            [routerLink]="['/detail', recipe._id]"
+            routerLinkActive="active"
+            class="details"
+          >
+            Podrobnosti
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
+  </div>
 </div>
 
 <ng-template #no_recipes>
-
-    <div id="no-recipes">
-        <h1 class="not-success">Z toho nic neuvaříš, zkus ještě prohledat spíž a nebo si objednej něco až domů</h1>
-        <a href="https://www.damejidlo.cz" clas="damejidlo"> <img  src="../../../assets/img/dj.png" alt="dame-jidlo"></a>
-    </div>
-
-
+  <div id="no-recipes">
+    <h1 class="not-success">
+      Z toho nic neuvaříš, zkus ještě prohledat spíž a nebo si objednej něco až
+      domů
+    </h1>
+    <a href="https://www.damejidlo.cz" clas="damejidlo">
+      <img src="../../../assets/img/dj.png" alt="dame-jidlo"
+    /></a>
+  </div>
 </ng-template>

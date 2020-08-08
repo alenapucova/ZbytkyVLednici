@@ -1,0 +1,63 @@
+<div class="loginWindow">
+  <div class="login-container">
+    <h1 mat-dialog-title>Registrace</h1>
+    <div mat-dialog-content>
+      <mat-form-field class="example-full-width">
+        <mat-label>Jméno</mat-label>
+        <input
+          matInput
+          class="loginInput"
+          type="text"
+          required
+          [(ngModel)]="firstName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Příjmení</mat-label>
+        <input
+          matInput
+          class="loginInput"
+          required
+          type="text"
+          [(ngModel)]="lastName"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="email@gmail.com"
+          value=""
+          required
+          [(ngModel)]="email"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Heslo</mat-label>
+        <input
+          matInput
+          value=""
+          minlength="6"
+          required
+          type="password"
+          id="pass"
+          name="password"
+          [(ngModel)]="password"
+        />
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button
+        (click)="createUser()"
+        routerLinkActive="active"
+        class="loginBtn"
+        mat-button
+        cdkFocusInitial
+      >
+        Zaregistrovat se
+      </button>
+    </div>
+  </div>
+  <div class="img-container"></div>
+</div>

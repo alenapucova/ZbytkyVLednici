@@ -1,14 +1,14 @@
 <app-header></app-header>
 <div class="background">
-<div class="part-one">
-
-        <img class="bg-img" src="../../../assets/img/cooking2.png" alt="bg">
-</div>
-<div class="part-two">
-
-
-<h1 class="main-header">Zadejte suroviny co máte doma</h1>
-<app-fridge-items (ingredientsChanged)="onIngredientChange($event)" (criteriaChanged)="onCriteriaChanged($event)"></app-fridge-items>
-</div>
+  <div class="part-one">
+    <img class="bg-img" src="../../../assets/img/cooking2.png" alt="bg" />
+  </div>
+  <div class="part-two">
+    <h1 class="main-header">Zadejte suroviny co máte doma</h1>
+    <app-fridge-items
+      (ingredientsChanged)="onIngredientChange($event)"
+      (criteriaChanged)="onCriteriaChanged($event)"
+    ></app-fridge-items>
+  </div>
 </div>
 <app-recipe [recipes]="recipes"></app-recipe>

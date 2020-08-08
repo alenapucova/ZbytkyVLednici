@@ -1,26 +1,33 @@
 $primary: #243665;
-$secondary:#8BD8BD;
+$secondary: #8bd8bd;
 
-
-.part-one{
-   
+.part-one {
 }
-.part-two{
-   
-    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-    background: linear-gradient(to left,#867f7f, #dbdbe2);
-   
-    
+.part-two {
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  background: linear-gradient(to left, #867f7f, #dbdbe2);
 }
-.back-btn{
-    position: fixed;
-    top: 0px;
-    right: 0px;
+.back-btn {
+  position: fixed;
+  top: 0px;
+  right: 0px;
 }
-.background{
-    display: grid;
-    grid-template-columns: 6fr 4fr;   
-    min-height: 100%;
-
-
+.background {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  min-height: 100%;
+}
+.profile {
+  display: flex;
+  padding: 0px 100px 100px 100px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+}
+.background {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }

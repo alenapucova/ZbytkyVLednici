@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-let Recipe = new Schema({
+let UserSchema = new Schema({
   id: String,
   title: String,
-  ingredients: [{ name: String, id: Number, amount: Number, unit: [String] }],
+  ingredients: [{ name: String, _id: String, amount: Number, unit: String }],
   progress: String,
   time: Number,
   difficulty: [String],
@@ -13,4 +13,8 @@ let Recipe = new Schema({
   foodType: [String]
 });
 
-export default mongoose.model("Recipe", Recipe);
+const Recipe = (module.exports = mongoose.model("Recipe", UserSchema));
+
+module.exports.getRecipeById = function(id, callback) {
+  Recipe.findById(id, callback);
+};
