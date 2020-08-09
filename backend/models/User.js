@@ -5,6 +5,7 @@ const config = require("../config/database");
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
+  id: String,
   firstName: String,
   lastName: String,
   email: {
@@ -15,7 +16,12 @@ let UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  favouriteRecipes: [
+    {
+      _id: String
+    }
+  ]
 });
 const User = (module.exports = mongoose.model("User", UserSchema));
 
@@ -41,4 +47,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
     if (err) throw err;
     callback(null, isMatch);
   });
+};
+module.exports.saveUser = function(newUser, callback) {
+  newUser.save(callback);
 };

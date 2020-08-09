@@ -4,6 +4,7 @@ import { Ingredient } from "./models/ingredient.model";
 import { Criteria } from "./models/criteria.model";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
+import { style } from "@angular/animations";
 
 @Injectable({
   providedIn: "root"
@@ -36,11 +37,15 @@ export class RecipeService {
     }
 
     if (criteria) {
+      console.log("criterie", criteria);
       if (criteria.style && criteria.style.length > 0) {
         crit = criteria.style.filter(style => style.checked);
 
         filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(style => recipe.foodStyle.includes(style.id))
+          crit.every(style => {
+            recipe.foodStyle.includes(style.id);
+            console.log("id", style.id);
+          })
         );
       }
       if (criteria.typeOfMeal && criteria.typeOfMeal.length > 0) {

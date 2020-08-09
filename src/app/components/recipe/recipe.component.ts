@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Recipe, Difficulty, FoodStyle } from "../../recipe";
 import { Ingredient } from "src/app/models/ingredient.model";
 import { UserService } from "src/app/user.service";
+import { User } from "src/app/user.model";
 
 @Component({
   selector: "app-recipe",
@@ -11,6 +12,7 @@ import { UserService } from "src/app/user.service";
 })
 export class RecipeComponent {
   @Input() recipes: Recipe[];
+  user: User;
 
   noGluten: string = "../../../assets/img/wheat.svg";
   noMeat: string = "../../../assets/img/nomeat.svg";
@@ -39,5 +41,24 @@ export class RecipeComponent {
     } else if (foodStyle.toString() === "None") {
       return this.none;
     }
+  }
+  getFavouriteRecipe(recipe: Recipe) {
+    this.userService.getProfile().subscribe(
+      profile => {
+        this.user = profile.user;
+        console.log("fav recipe", recipe._id);
+        console.log("user", this.user._id);
+
+        this.userService
+          .setFavouriteRecipe(this.user._id, recipe._id)
+          .subscribe(favRecipe => {
+            console.log("fav", favRecipe);
+          });
+      },
+      err => {
+        console.log(err);
+        return false;
+      }
+    );
   }
 }

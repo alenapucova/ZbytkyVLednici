@@ -37,7 +37,8 @@
 <div class="listOfItems">
   <ul>
     <li class="singleItem" *ngFor="let item of chosenIngredients">
-      {{ item.name }} {{ item.amount }} {{ getUnitName(item.unit) }}
+      {{ item.name }} {{ item.amount }}
+      {{ chosenIngredient && getUnitName(item.unit) }}
       <button (click)="deleteItem(item)" class="deleteBtn">x</button>
     </li>
   </ul>

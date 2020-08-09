@@ -99,6 +99,48 @@ router.get(
     });
   }
 );
+router.route("/user/:userID/favouriteRecipes").get((req, res) => {
+  const userID = req.params.userID;
+  console.log(userID);
+
+  User.getUserById(userID, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    } else {
+      return res.json(user.favouriteRecipes);
+    }
+  });
+});
+
+router.route("/user/:userID/favouriteRecipes/:recipeID").get((req, res) => {
+  const userID = req.params.userID;
+  const recipeID = req.params.recipeID;
+
+  User.getUserById(userID, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    if (user.favouriteRecipes) {
+      if (user.favouriteRecipes.find(e => e.id === recipeID)) {
+        console.log("Recipe is already marked as favourite");
+      } else {
+        user.favouriteRecipes.push(recipeID);
+      }
+
+      User.saveUser(user, (err, user) => {
+        if (err) {
+          res.json({ success: false, message: "Failed to save" });
+        } else {
+          res.json({ success: true, message: "User has been saved", user });
+        }
+      });
+    } else {
+      user.favouriteRecipes = [recipeID];
+    }
+  });
+});
 
 //Routes for recipes
 
@@ -110,13 +152,10 @@ router.route("/recipes").get((req, res) => {
         if (err) console.log(err);
         else {
           recipes.forEach(recipe => {
-            console.warn(recipe);
-            console.log(ingredients);
             recipe.ingredients.forEach(ingredient => {
               const richIngredient = ingredients.find(
                 item => item._id.toString() === ingredient._id.toString()
               );
-              console.warn("rich", richIngredient);
               if (richIngredient) {
                 ingredient.name = richIngredient.name;
                 ingredient.unit = richIngredient.unit;

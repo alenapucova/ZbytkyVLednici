@@ -5,11 +5,7 @@
 
   <div class="recipe-list">
     <div *ngFor="let recipe of recipes" class="recipe">
-      <mat-card
-        class="recipe-card"
-        routerLink="/detail/{{ recipe._id }}"
-        routerLinkActive="active"
-      >
+      <mat-card class="recipe-card">
         <img
           mat-card-image
           src="../../../assets/img/{{ recipe._id }}min.jpg"
@@ -19,6 +15,7 @@
           class="fa fa-heart fa-2x like"
           aria-hidden="true"
           *ngIf="userService.loggedIn()"
+          (click)="getFavouriteRecipe(recipe)"
         ></i>
         <mat-card-header>
           <mat-card-title>{{ recipe.title }}</mat-card-title>
@@ -59,3 +56,12 @@
     /></a>
   </div>
 </ng-template>
+
+<!--
+
+
+  routerLink="/detail/{{ recipe._id }}"
+        routerLinkActive="active"
+
+         
+-->

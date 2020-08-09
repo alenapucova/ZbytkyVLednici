@@ -2,25 +2,14 @@ export class Ingredient {
   name: string;
   _id: string;
   amount: number;
-  unit: Unit;
+  unit: string;
 
-  constructor(name: string, id: string, unit: Unit, amount?: number) {
+  constructor(name: string, id: string, unit: string, amount?: number) {
     this.name = name;
     this._id = id;
     this.amount = amount;
     this.unit = unit;
   }
-
-  /*  getUnitName(): string {
-        switch (this.unit) {
-            case Unit.G:
-                return "g";
-            case Unit.Ks:
-                return "ks";
-            case Unit.Ml:
-                return "ml";
-        }
-    }*/
 }
 export enum Unit {
   G,
@@ -29,13 +18,13 @@ export enum Unit {
 }
 
 export class IngredientUtils {
-  public static getUnitName(unit: Unit): string {
+  public static getUnitName(unit: string): string {
     switch (unit) {
-      case Unit.G:
+      case "G":
         return "g";
-      case Unit.Ks:
+      case "Ks":
         return "ks";
-      case Unit.Ml:
+      case "Ml":
         return "ml";
     }
   }

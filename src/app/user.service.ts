@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
-import { User } from "./user.model";
+import { Recipe } from "./recipe";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -77,5 +77,17 @@ export class UserService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  setFavouriteRecipe(userID: string, recipeID: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.uri}/user/${userID}/favouriteRecipes/${recipeID}`
+    );
+  }
+
+  getFavouriteRecipes(userID: string): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(
+      `${this.uri}/user/${userID}/favouriteRecipes`
+    );
   }
 }

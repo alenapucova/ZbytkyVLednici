@@ -1,53 +1,48 @@
 $primary: #243665;
-$secondary:#8BD8BD;
+$secondary: #8bd8bd;
 $ligh-bg: rgb(214, 211, 211);
 
+.example-form {
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 
-.example-form{
-    text-align: center;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-
-    
-    input, button{
-        //width: 60%;
-        flex: 1;
-        height: 36px;
-       // border: 1px solid $primary;
-        border-radius: 5px;
-        padding-left:10px;
-        margin: 0px 2px;
-        
-    } 
-    .unit{
-        width: 25px;
-        font-size: 20px;
-        padding-top: 7px;
-    }
-
-    
+  input,
+  button {
+    //width: 60%;
+    flex: 1;
+    //height: 36px;
+    // border: 1px solid $primary;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin: 0px 2px;
+  }
+  .unit {
+    width: 25px;
+    font-size: 20px;
+    padding-top: 7px;
+  }
 }
-.listOfItems{
-    background-color: $ligh-bg;
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    //font-family: 'Gotu', sans-serif;
+.listOfItems {
+  background-color: $ligh-bg;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  //font-family: 'Gotu', sans-serif;
 
-    .deleteBtn{
-        color: white;
-        background-color: red;
-        border:none;
-        box-shadow: none;
-        border-radius: 50%;
-        cursor: pointer;
-        float: right;
-        margin-right:10%;
-    }
-    .singleItem{
-      
-        padding: 3% 0;
-        border-radius: 5%;
-    }
+  .deleteBtn {
+    color: white;
+    background-color: red;
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    cursor: pointer;
+    float: right;
+    margin-right: 10%;
+  }
+  .singleItem {
+    padding: 3% 0;
+    border-radius: 5%;
+  }
 }

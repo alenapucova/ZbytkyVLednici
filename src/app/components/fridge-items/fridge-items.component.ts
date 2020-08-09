@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter
-} from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import {
   Ingredient,
   Unit,
@@ -86,7 +81,8 @@ export class FridgeItemsComponent implements OnInit {
         //po pridani surovin vymazat input pole
         this.amount = null;
         this.item = "";
-        this.chosenIngredient = null;
+
+        //this.chosenIngredient = null;
 
         this.ingredientsChanged.emit(this.chosenIngredients);
 
@@ -130,33 +126,21 @@ export class FridgeItemsComponent implements OnInit {
   }
   onCriteriaChanged(value: Criteria) {
     this.criteriaChanged.emit(value);
-    // localStorage.setItem("criteria", JSON.stringify(value));
   }
   loadLocalStorage() {
     let localStoreItems = JSON.parse(localStorage.getItem("items"));
-    //let localStoreCriteria = JSON.parse(localStorage.getItem("criteria"))
-    //console.log(localStoreCriteria);
-    //console.log(localStoreCriteria)
-
-    //console.log(this.criteriaChanged)
 
     if (localStoreItems) {
       this.chosenIngredients = localStoreItems as Ingredient[];
       this.ingredientsChanged.emit(this.chosenIngredients);
     }
-    // if(localStoreCriteria) {
-    // this.criteriaChanged = localStoreCriteria;
 
-    //this.criteriaChanged.emit(this.allItems);
-    //}
-
-    //this.allItems = (JSON.parse(localStorage.getItem("items")) as Ingredient[]);
-    //this.ingredientsChanged.emit(this.allItems);
-    console.log(this.chosenIngredients);
+    console.log("chosen Ingredients", this.chosenIngredients);
 
     //localStorage.clear()
   }
-  getUnitName(unit: Unit): string {
+  getUnitName(unit: string): string {
+    console.log("chosen", this.chosenIngredient.unit);
     return IngredientUtils.getUnitName(unit);
   }
 }

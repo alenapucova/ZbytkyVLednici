@@ -39,7 +39,7 @@ export class RecipeDetailComponent implements OnInit {
   getPortions(): number {
     return this.portion;
   }
-  getUnitName(unit: Unit): string {
+  getUnitName(unit: string): string {
     return IngredientUtils.getUnitName(unit);
   }
 }
