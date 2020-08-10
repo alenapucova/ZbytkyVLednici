@@ -18,21 +18,19 @@ export class IndexComponent implements OnInit {
   selectedIngredients: Ingredient[];
   selectedCriteria: Criteria;
 
-  constructor(private recipeService: RecipeService, public dialog: MatDialog) {}
+  constructor(private recipeService: RecipeService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(recipes => {
-      console.log("recipes", recipes);
       this.allRecipes = recipes;
       this.onChange();
     });
   }
 
   onIngredientChange(ingredients: Ingredient[]) {
-    console.log(
-      "selected ingredients",
-      ingredients.map(ingredient => ingredient.name)
-    );
+
+    ingredients.map(ingredient => ingredient.name)
+
     this.selectedIngredients = ingredients;
     this.onChange();
   }

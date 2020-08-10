@@ -19,7 +19,7 @@ export class HeaderComponent {
     public userService: UserService,
     private _snackBar: MatSnackBar,
     private router: Router
-  ) {}
+  ) { }
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -30,7 +30,6 @@ export class HeaderComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
       this.user = result;
     });
   }
@@ -43,4 +42,3 @@ export class HeaderComponent {
     return false;
   }
 }
-// part 9, 14:17

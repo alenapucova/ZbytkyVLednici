@@ -1,17 +1,13 @@
 $primary: #243665;
 $secondary: #8bd8bd;
-
+/*
 .part-one {
 }
 .part-two {
   clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
   background: linear-gradient(to left, #867f7f, #dbdbe2);
 }
-.back-btn {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-}
+
 .background {
   display: grid;
   grid-template-columns: 6fr 4fr;
@@ -31,3 +27,33 @@ $secondary: #8bd8bd;
   justify-content: space-around;
   align-items: center;
 }
+*/
+.back-btn {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+body {
+  height: 100%;
+}
+.info {
+  min-height: 750px;
+  padding-top: 50px;
+  background: linear-gradient(to right, rgb(197, 226, 207), rgb(161, 241, 177));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item {
+  padding: 20px 0px;
+}
+/*.item1 {
+  flex: 2;
+}
+.item2 {
+  flex: 1;
+}
+.item3 {
+  flex: 1;
+}
+*/

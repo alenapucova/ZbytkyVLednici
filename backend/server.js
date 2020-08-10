@@ -178,15 +178,18 @@ router.route("/recipe/:id").get((req, res, next) => {
     if (!recipe) {
       return res.json({ success: false, message: "Recipe not found" });
     } else {
-      return res.json({
-        _id: recipe._id,
-        title: recipe.title,
-        ingredients: [recipe.ingredients],
-        progress: recipe.progress,
-        time: recipe.time,
-        difficulty: [recipe.difficulty],
-        foodStyle: [recipe.foodStyle],
-        foodType: [recipe.foodType]
+      Ingredient.find((err, ingredients) => {
+        if (err) console.log(err);
+        else {
+          recipe.ingredients.forEach(ingredient => {
+            const richIngredient = ingredients.find(item => item._id.toString() === ingredient._id.toString());
+            if (richIngredient) {
+              ingredient.name = richIngredient.name;
+              ingredient.unit = richIngredient.unit;
+            }
+          });
+          return res.json(recipe);
+        }
       });
     }
   });
@@ -230,7 +233,7 @@ To start robo 3t
 
 To start mongo
 
-cd backend 
+cd backend
 mongod
 
 sudo lsof -iTCP -sTCP:LISTEN -n -P

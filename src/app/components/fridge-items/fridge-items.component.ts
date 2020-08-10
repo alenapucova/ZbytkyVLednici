@@ -32,13 +32,12 @@ export class FridgeItemsComponent implements OnInit {
 
   filteredOptions: Observable<Ingredient[]>;
 
-  constructor(private ingredientService: IngredientsService) {}
+  constructor(private ingredientService: IngredientsService) { }
 
   ngOnInit() {
     this.loadLocalStorage();
     this.ingredientService.getIngredients().subscribe(ingredients => {
       this.options = ingredients;
-      console.log("options", this.options);
       this.upDateOptions();
     });
   }
@@ -61,8 +60,6 @@ export class FridgeItemsComponent implements OnInit {
   //zvolena surovina z auto complete
   itemSelected(selected: MatAutocompleteSelectedEvent) {
     this.chosenIngredient = selected.option.value;
-    // this.unit = this.chosenIngredient.unit.toString();
-    console.log(this.chosenIngredient);
   }
 
   addItem() {
@@ -75,7 +72,6 @@ export class FridgeItemsComponent implements OnInit {
         //zkontrolovat, ze amount je číslo
         //pridani suroviny do seznamu
         this.chosenIngredients.push(this.chosenIngredient);
-        console.log("ingredience", this.chosenIngredient._id);
         //vymazani suroviny z nabidky
         this.removeOption(this.options, this.chosenIngredient._id);
         //po pridani surovin vymazat input pole
@@ -135,12 +131,8 @@ export class FridgeItemsComponent implements OnInit {
       this.ingredientsChanged.emit(this.chosenIngredients);
     }
 
-    console.log("chosen Ingredients", this.chosenIngredients);
-
-    //localStorage.clear()
   }
   getUnitName(unit: string): string {
-    console.log("chosen", this.chosenIngredient.unit);
     return IngredientUtils.getUnitName(unit);
   }
 }

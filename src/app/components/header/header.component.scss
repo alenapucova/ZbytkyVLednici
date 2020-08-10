@@ -22,10 +22,16 @@ $secondary:#8BD8BD;
 }
 .login{
     height: 35px;
-    position: fixed;
-    top: 0px;
-    right: 0px;
     z-index: 1;
+}
+.logout{
+    margin: 2px 5px;
+    width: 120px;
+}
+.corner-btns{
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 .loginInput[_ngcontent-whd-c14] {
     width: 80%;

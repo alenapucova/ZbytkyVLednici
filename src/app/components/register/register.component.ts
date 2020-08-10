@@ -20,7 +20,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   durationInSeconds = 5;
   firstName: String;
   lastName: String;
@@ -30,9 +30,7 @@ export class RegisterComponent implements OnInit {
   users: User[];
   user: User;
 
-  ngOnInit() {
-    // this.fetchUsers();
-  }
+
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -40,20 +38,11 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   onNoClick(): void {
     //this.dialogRef.close();
   }
-  /*
-  fetchUsers() {
-    this.userService.getUsers().subscribe((data: User[]) => {
-      this.users = data;
-      console.log("Data requested ... ");
-      console.log(this.users);
-    });
-  }
-  */
 
   createUser() {
     const user = {

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { Recipe, Difficulty, FoodStyle } from "../../recipe";
-import { Ingredient } from "src/app/models/ingredient.model";
 import { UserService } from "src/app/user.service";
 import { User } from "src/app/user.model";
 
@@ -13,13 +12,21 @@ import { User } from "src/app/user.model";
 export class RecipeComponent {
   @Input() recipes: Recipe[];
   user: User;
+  favouriteRecipes: string[];
 
   noGluten: string = "../../../assets/img/wheat.svg";
   noMeat: string = "../../../assets/img/nomeat.svg";
   lowCarb: string = "../../../assets/img/lc.svg";
-  none: string = "";
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService) { }
+
+  ngOnInit() {
+    this.userService.getProfile().subscribe(profile => {
+      this.user = profile.user;
+      this.favouriteRecipes = this.user.favouriteRecipes.map(recipes => recipes._id);
+    });
+    console.log(this.recipes.map(recipe => recipe.foodStyle))
+  }
 
   getDifficulty(difficulty: Difficulty) {
     if (difficulty.toString() === "Easy") {
@@ -31,34 +38,25 @@ export class RecipeComponent {
     }
   }
   getFoodStyle(foodStyle: FoodStyle): string {
-    console.warn("foodstyle type", typeof foodStyle);
     if (foodStyle.toString() === "GlutenFree") {
       return this.noGluten;
-    } else if (foodStyle.toString() === "LowCarb") {
-      return this.lowCarb;
     } else if (foodStyle.toString() === "NoMeat") {
       return this.noMeat;
-    } else if (foodStyle.toString() === "None") {
-      return this.none;
+    } else if (foodStyle.toString() === "LowCarb") {
+      return this.lowCarb;
     }
   }
   getFavouriteRecipe(recipe: Recipe) {
-    this.userService.getProfile().subscribe(
-      profile => {
-        this.user = profile.user;
-        console.log("fav recipe", recipe._id);
-        console.log("user", this.user._id);
-
-        this.userService
-          .setFavouriteRecipe(this.user._id, recipe._id)
-          .subscribe(favRecipe => {
-            console.log("fav", favRecipe);
-          });
-      },
-      err => {
-        console.log(err);
-        return false;
-      }
-    );
+    this.userService
+      .setFavouriteRecipe(this.user._id, recipe._id)
+      .subscribe(favRecipe => {
+        console.log("fav", favRecipe);
+      });
+    this.user.favouriteRecipes.push({ _id: recipe._id });
+  }
+  isFavourite(recipe: Recipe): boolean {
+    if (this.favouriteRecipes) {
+      return this.favouriteRecipes.includes(recipe._id);
+    }
   }
 }

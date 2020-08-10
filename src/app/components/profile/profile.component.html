@@ -1,25 +1,19 @@
 <div *ngIf="user">
-  <div class="background">
-    <div class="part-one">
-      <div class="profile">
-        <h1>Můj profil</h1>
-        <img src="../../../assets/img/avatar.png" alt="avatar" />
-        <h2>{{ user.firstName }}</h2>
-        <h2>{{ user.email }}</h2>
-        <h2>Moje oblíbené recepty</h2>
-        <button (click)="showFavouriteRecipes()">Fav</button>
+  <div id="background">
+    <div class="info">
+      <h1 class="item item1">Můj profil</h1>
+      <h2 class="item item2">Jméno: {{ user.firstName }}</h2>
+      <h2 class="item item3">Email: {{ user.email }}</h2>
+      <div class="fav-recipes" *ngIf="favouriteRecipes">
+        <h2 class="item item4">Moje oblíbené recepty</h2>
         <app-recipe [recipes]="favouriteRecipes"></app-recipe>
-        <h2>Můj seznam surovin</h2>
-
-        <button
-          class="back-btn ui toggle button"
-          routerLink="/home"
-          routerLinkActive="active"
-        >
-          Zpět na hlavní stránku
-        </button>
       </div>
+
+      <h2 class="item item5">Můj seznam surovin</h2>
     </div>
-    <div class="part-two"></div>
+    <button class="back-btn ui toggle button" routerLink="/home" routerLinkActive="active" mat-raised-button
+      color="primary">
+      Zpět na hlavní stránku
+    </button>
   </div>
 </div>

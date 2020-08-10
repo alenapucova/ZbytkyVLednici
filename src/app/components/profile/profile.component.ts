@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { UserService } from "src/app/user.service";
 import { RecipeService } from "src/app/recipe.service";
 import { MatSnackBar } from "@angular/material";
@@ -16,16 +15,26 @@ export class ProfileComponent implements OnInit {
   favouriteRecipes: Recipe[] = [];
 
   constructor(
-    private router: Router,
     private userService: UserService,
     private recipeService: RecipeService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.getProfile().subscribe(
       profile => {
         this.user = profile.user;
+        this.userService
+          .getFavouriteRecipes(this.user._id)
+          .subscribe(favRecipe => {
+            favRecipe.map(recipe => {
+              this.recipeService
+                .getRecipeById(recipe._id)
+                .subscribe(favourite => {
+                  this.favouriteRecipes.push(favourite);
+                });
+            });
+          });
       },
       err => {
         console.log(err);
@@ -34,15 +43,5 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  showFavouriteRecipes() {
-    this.userService.getFavouriteRecipes(this.user._id).subscribe(favRecipe => {
-      console.log("show", favRecipe);
-      favRecipe.map(recipe => {
-        this.recipeService.getRecipeById(recipe._id).subscribe(favourite => {
-          this.favouriteRecipes.push(favourite);
-          this.recipeService.getFilteredRecipes(this.favouriteRecipes);
-        });
-      });
-    });
-  }
+  showFavouriteRecipes() { }
 }

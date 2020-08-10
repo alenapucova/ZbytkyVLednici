@@ -1,7 +1,12 @@
 export interface User {
   _id: string;
-  firstName: String;
-  lastName: String;
-  email: String;
-  password: String;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  favouriteRecipes: [
+    {
+      _id: string;
+    }
+  ];
 }

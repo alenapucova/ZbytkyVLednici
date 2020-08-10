@@ -19,16 +19,14 @@ export class RecipeDetailComponent implements OnInit {
     private recipeService: RecipeService,
     private portionService: PortionsService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.recipeService.getRecipeById(params.get("id")).subscribe(recipe => {
         this.recipe = recipe;
-        console.warn("recipe detail", this.recipe);
       });
     });
-
     this.portionService.portion.subscribe(res => {
       this.portion = res;
     });
