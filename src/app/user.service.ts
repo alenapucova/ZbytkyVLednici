@@ -4,6 +4,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { Recipe } from "./recipe";
 import { Observable } from "rxjs";
+import { Ingredient } from './models/ingredient.model';
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class UserService {
   authToken: any;
   user: any;
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   validateRegister(user) {
     if (
@@ -88,6 +89,22 @@ export class UserService {
   getFavouriteRecipes(userID: string): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(
       `${this.uri}/user/${userID}/favouriteRecipes`
+    );
+  }
+
+  setFavouriteIngredients(userID: string, favouriteIngredients: Ingredient[]): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
+    };
+    console.log('favIngredient', favouriteIngredients)
+    const fav = JSON.stringify(favouriteIngredients)
+    return this.http.post<any>(
+      `${this.uri}/user/${userID}/setFavouriteIngredients`, favouriteIngredients, httpOptions
+    );
+  }
+  getFavouriteIngredients(userID: string): Observable<Ingredient[]> {
+    return this.http.get<Ingredient[]>(
+      `${this.uri}/user/${userID}/favouriteIngredients`
     );
   }
 }

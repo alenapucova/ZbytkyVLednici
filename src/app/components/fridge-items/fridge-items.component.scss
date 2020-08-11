@@ -1,35 +1,38 @@
 $primary: #243665;
 $secondary: #8bd8bd;
-$ligh-bg: rgb(214, 211, 211);
+$ligh-bg: rgb(230, 225, 225);
 
 .example-form {
-  text-align: center;
+ 
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
 
-  input,
-  button {
-    //width: 60%;
-    flex: 1;
-    //height: 36px;
-    // border: 1px solid $primary;
+  input
+ {
     border-radius: 5px;
     padding-left: 10px;
     margin: 0px 2px;
   }
+  button{
+    padding: 0px 5px;
+    margin: 0px 2px;
+    width: 150px;
+  }
+  
   .unit {
-    width: 25px;
+    width: 30px;
     font-size: 20px;
     padding-top: 7px;
+    text-align: center;
   }
 }
 .listOfItems {
+  
   background-color: $ligh-bg;
   width: 75%;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  //font-family: 'Gotu', sans-serif;
+  font-family: "Gill Sans",  sans-serif;
 
   .deleteBtn {
     color: white;
@@ -40,9 +43,11 @@ $ligh-bg: rgb(214, 211, 211);
     cursor: pointer;
     float: right;
     margin-right: 10%;
+    width: 25px;
+    height: 25px;
   }
   .singleItem {
-    padding: 3% 0;
+    padding: 3% 0%;
     border-radius: 5%;
   }
 }

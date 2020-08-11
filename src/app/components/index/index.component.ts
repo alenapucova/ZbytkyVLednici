@@ -29,6 +29,7 @@ export class IndexComponent implements OnInit {
 
   onIngredientChange(ingredients: Ingredient[]) {
 
+    console.log('from index');
     ingredients.map(ingredient => ingredient.name)
 
     this.selectedIngredients = ingredients;

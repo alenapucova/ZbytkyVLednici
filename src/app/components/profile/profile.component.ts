@@ -4,6 +4,7 @@ import { RecipeService } from "src/app/recipe.service";
 import { MatSnackBar } from "@angular/material";
 import { User } from "src/app/user.model";
 import { Recipe } from "src/app/recipe";
+import { Ingredient } from 'src/app/models/ingredient.model';
 
 @Component({
   selector: "app-profile",
@@ -13,6 +14,7 @@ import { Recipe } from "src/app/recipe";
 export class ProfileComponent implements OnInit {
   user: User;
   favouriteRecipes: Recipe[] = [];
+  favouriteIngredients: Ingredient[] = [];
 
   constructor(
     private userService: UserService,
@@ -35,6 +37,10 @@ export class ProfileComponent implements OnInit {
                 });
             });
           });
+        /*this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
+          this.favouriteIngredients = favouriteIngredients;
+          console.log('favouriteIngredients', this.favouriteIngredients);
+        })*/
       },
       err => {
         console.log(err);
@@ -43,5 +49,9 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  showFavouriteRecipes() { }
+  setFavouriteIngredient(ingredients: Ingredient[]) {
+    console.log('from profile');
+    this.userService.setFavouriteIngredients(this.user._id, ingredients).subscribe();
+
+  }
 }

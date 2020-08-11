@@ -142,6 +142,60 @@ router.route("/user/:userID/favouriteRecipes/:recipeID").get((req, res) => {
   });
 });
 
+router.route("/user/:userID/setFavouriteIngredients").post((req, res) => {
+  const userID = req.params.userID;
+  const ingredients = req.body;
+  console.log('ingredients', ingredients);
+
+  User.getUserById(userID, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    if (user.favouriteIngredients) {
+      user.favouriteIngredients = [];
+      user.favouriteIngredients = ingredients;
+
+      User.saveUser(user, (err, user) => {
+        if (err) {
+          res.json({ success: false, message: "Failed to save" });
+        } else {
+          res.json({ success: true, message: "User has been saved", user });
+        }
+      });
+    } else {
+      user.favouriteIngredients = [ingredients];
+    }
+  });
+});
+
+router.route("/user/:userID/favouriteIngredients").get((req, res) => {
+  const userID = req.params.userID;
+  console.log(userID);
+
+  User.getUserById(userID, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    } else {
+      Ingredient.find((err, ingredients) => {
+        if (err) console.log(err);
+        else {
+          user.favouriteIngredients.forEach(favIng => {
+            const richIngredient = ingredients.find(
+              item => item._id.toString() === favIng._id.toString()
+            );
+            if (richIngredient) {
+              favIng.name = richIngredient.name;
+              favIng.unit = richIngredient.unit;
+            }
+          });
+          res.json(user.favouriteIngredients);
+        }
+      });
+    }
+  });
+});
 //Routes for recipes
 
 router.route("/recipes").get((req, res) => {

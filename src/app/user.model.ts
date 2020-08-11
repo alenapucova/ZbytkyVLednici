@@ -8,5 +8,11 @@ export interface User {
     {
       _id: string;
     }
-  ];
+  ],
+  favouriteIngredients: [
+    {
+      _id: string;
+      amount: number;
+    }
+  ]
 }

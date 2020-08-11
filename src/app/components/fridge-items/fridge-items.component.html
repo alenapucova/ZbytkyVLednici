@@ -1,28 +1,11 @@
 <form class="example-form">
-  <input
-    type="text"
-    matInput
-    [formControl]="myControl"
-    [matAutocomplete]="auto"
-    name="Ingredient"
-    [(ngModel)]="item"
-    placeholder="Sem zadejte suroviny..."
-  />
-  <input
-    type="text"
-    placeholder="Zadejte množství"
-    name="amount"
-    class="amount-input"
-    [(ngModel)]="amount"
-  />
+  <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" name="Ingredient" [(ngModel)]="item"
+    placeholder="Sem zadejte suroviny..." />
+  <input type="text" placeholder="Zadejte množství" name="amount" class="amount-input" [(ngModel)]="amount" />
   <div class="unit">
     {{ chosenIngredient && getUnitName(chosenIngredient.unit) }}
   </div>
-  <mat-autocomplete
-    #auto="matAutocomplete"
-    [displayWith]="displayFn"
-    (optionSelected)="itemSelected($event)"
-  >
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event)">
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
       {{ option.name }}
     </mat-option>
@@ -32,23 +15,16 @@
   </button>
 </form>
 
-<app-side-bar (criteriaChanged)="onCriteriaChanged($event)"></app-side-bar>
+<div *ngIf="showCriteria">
+  <app-side-bar (criteriaChanged)="onCriteriaChanged($event)"></app-side-bar>
+</div>
 
 <div class="listOfItems">
   <ul>
     <li class="singleItem" *ngFor="let item of chosenIngredients">
       {{ item.name }} {{ item.amount }}
-      {{ chosenIngredient && getUnitName(item.unit) }}
+      {{ getUnitName(item.unit) }}
       <button (click)="deleteItem(item)" class="deleteBtn">x</button>
     </li>
   </ul>
 </div>
-
-<!--(optionSelected)="itemSelected($event)"
-(keyup.Enter)="addItem($event)"
- <button (click)="addItem(newItem)" class="ui button">Přidat surovinu</button>  
-(keyup.Enter)="addItem(newItem)" 
-(optionSelected)="itemSelected($event)" udělat, aby po inputu skočil focus na množství, tuto metodu dám na btn
-
-{{item.getUnitName()}}
--->

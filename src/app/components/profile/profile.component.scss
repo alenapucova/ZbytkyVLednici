@@ -45,7 +45,7 @@ body {
   align-items: center;
 }
 .item {
-  padding: 20px 0px;
+  padding: 10px 0px;
 }
 /*.item1 {
   flex: 2;
@@ -57,3 +57,10 @@ body {
   flex: 1;
 }
 */
+mat-expansion-panel {
+  text-align: center;
+  background-color:  rgb(93, 124, 99);
+}
+mat-panel-title {
+  justify-content: center !important;
+}

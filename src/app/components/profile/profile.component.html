@@ -5,11 +5,28 @@
       <h2 class="item item2">Jméno: {{ user.firstName }}</h2>
       <h2 class="item item3">Email: {{ user.email }}</h2>
       <div class="fav-recipes" *ngIf="favouriteRecipes">
-        <h2 class="item item4">Moje oblíbené recepty</h2>
-        <app-recipe [recipes]="favouriteRecipes"></app-recipe>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header class="center">
+            <mat-panel-title>
+              <h2 class="item item4">Moje oblíbené recepty</h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-recipe [recipes]="favouriteRecipes"></app-recipe>
+        </mat-expansion-panel>
       </div>
 
-      <h2 class="item item5">Můj seznam surovin</h2>
+      <div class="fav-ingredients">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header class="center">
+            <mat-panel-title>
+              <h2 class="item item5">Můj seznam surovin</h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-fridge-items [showCriteria]="false" [favouriteIngredients]="favouriteIngredients"
+            (ingredientsChanged)="setFavouriteIngredient($event)">
+          </app-fridge-items>
+        </mat-expansion-panel>
+      </div>
     </div>
     <button class="back-btn ui toggle button" routerLink="/home" routerLinkActive="active" mat-raised-button
       color="primary">

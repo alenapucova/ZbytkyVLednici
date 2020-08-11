@@ -1,84 +1,8 @@
-<!--<ul class="sideBar">
-  <button mat-raised-button color="secondary" [matMenuTriggerFor]="menu" class="side-bar-btn">
-    <img class="icon" src={{time.path}} alt="icon">
-  </button>
-  <mat-menu #menu="matMenu" class="criteria">
-    <div class="menu-display">
-      <p class="side-bar-title">{{time.title}}</p>
-      <div class="slider">
-        {{time.min}}
-        <mat-slider (change)="onTimeChanged()" (click)="$event.stopPropagation();" color="primary" [thumbLabel]="true"
-          [min]="time.min" [max]="time.max" [(ngModel)]="time.value"></mat-slider>
-        {{time.max}}
-      </div>
-    </div>
-  </mat-menu>
-
-  <button mat-raised-button color="secondary" [matMenuTriggerFor]="menu2" class="side-bar-btn">
-    <img class="icon" src={{portions.path}} alt="icon">
-  </button>
-  <mat-menu #menu2="matMenu" >
-    <div class="menu-display">
-      <p class="side-bar-title">{{portions.title}}</p>
-      <div class="slider">
-        {{portions.min}}
-        <mat-slider (change)="onPortionsChanged()" (click)="$event.stopPropagation();" color="primary"
-          [thumbLabel]="true" [min]="portions.min" [max]="portions.max" [(ngModel)]="portions.value"></mat-slider>
-        {{portions.max}}
-      </div>
-    </div>
-  </mat-menu>
-
-  <button mat-raised-button color="secondary" [matMenuTriggerFor]="menu3" class="side-bar-btn">
-    <img class="icon" src={{style.path}} alt="icon">
-  </button>
-  <mat-menu #menu3="matMenu" >
-    <div class="menu-display">
-      <p class="side-bar-title">{{style.title}}</p>
-      <div class="tabcontent" *ngFor="let option of style.options" (click)="$event.stopPropagation();">
-        <input id="{{'fs' + option.id}}" type="checkbox"  (change)="onStyleChanged(option,$event)"  [(ngModel)]="option.checked">
-        <label class="option" for="{{'fs' + option.id}}">{{option.name}}</label>
-      </div>
-    </div>
-  </mat-menu>
-
-  <button mat-raised-button color="secondary" [matMenuTriggerFor]="menu4" class="side-bar-btn">
-    <img class="icon" src={{difficulty.path}} alt="icon">
-  </button>
-  <mat-menu #menu4="matMenu">
-    <div class="menu-display">
-      <p class="side-bar-title">{{difficulty.title}}</p>
-      <div class="tabcontent" *ngFor="let option of difficulty.options" (click)="$event.stopPropagation();">
-        <input id="{{'fs' + option.id}}" type="checkbox" (change)="onDifficultyChanged()" [(ngModel)]="option.checked">
-        <label class="option" for="{{'fs' + option.id}}">{{option.name}}</label>
-      </div>
-    </div>
-  </mat-menu>
-
-  <button mat-raised-button color="secondary" [matMenuTriggerFor]="menu5" class="side-bar-btn">
-    <img class="icon" src={{typeOfMeal.path}} alt="icon">
-  </button>
-  <mat-menu #menu5="matMenu">
-    <div class="menu-display">
-      <p class="side-bar-title">{{typeOfMeal.title}}</p>
-      <div class="tabcontent" *ngFor="let option of typeOfMeal.options" (click)="$event.stopPropagation();">
-        <input id="{{'fs' + option.id}}" type="checkbox" (change)="onTypeOfMealChanged()" [(ngModel)]="option.checked">
-        <label class="option" for="{{'fs' + option.id}}">{{option.name}}</label>
-      </div>
-    </div>
-  </mat-menu>
- 
-</ul>-->
-
-
-
 <mat-tab-group>
-
-
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">person_add</mat-icon>
-  
+
     </ng-template>
     <div class="menu-display">
       <p class="side-bar-title">{{portions.title}}</p>
@@ -94,7 +18,7 @@
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">alarm</mat-icon>
-    
+
     </ng-template>
     <div class="menu-display">
       <p class="side-bar-title">{{time.title}}</p>
@@ -104,19 +28,20 @@
           [min]="time.min" [max]="time.max" [(ngModel)]="time.value"></mat-slider>
         {{time.max}} min
       </div>
-      </div>
+    </div>
   </mat-tab>
-  
+
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">restaurant</mat-icon>
-     
+
     </ng-template>
 
     <div class="menu-display">
       <p class="side-bar-title">{{style.title}}</p>
       <div class="tabcontent" *ngFor="let option of style.options" (click)="$event.stopPropagation();">
-        <input id="{{'fs' + option.id}}" type="checkbox"  (change)="onStyleChanged(option,$event)"  [(ngModel)]="option.checked">
+        <input id="{{'fs' + option.id}}" type="checkbox" (change)="onStyleChanged(option,$event)"
+          [(ngModel)]="option.checked">
         <label class="option" for="{{'fs' + option.id}}">{{option.name}}</label>
       </div>
     </div>
@@ -125,7 +50,7 @@
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">star</mat-icon>
-     
+
     </ng-template>
 
     <div class="menu-display">
@@ -140,7 +65,7 @@
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">fastfood</mat-icon>
-     
+
     </ng-template>
 
     <div class="menu-display">

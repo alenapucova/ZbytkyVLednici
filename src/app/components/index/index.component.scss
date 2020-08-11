@@ -1,6 +1,6 @@
 .main-header{
     text-align: center;
-   
+   margin-bottom: 30px;
     color: black;
     font-family: 'Gotu', sans-serif;
 }
@@ -9,16 +9,10 @@
     display: grid;
     grid-template-columns: 6fr 4fr;
     grid-template-rows: 100%;
-    //min-height: 100%;
-    //margin-top: -15%;
-    //height: 80%;
-
-
+    
 }
 .part-one{
     clip-path: polygon(0 0, 100% 0, 72% 100%, 0 100%);
-
-    //background: linear-gradient(to left,#867f7f, #dbdbe2);
    
     width: 100%;
     z-index: -1;
@@ -27,6 +21,6 @@
     }
 }
 .part-two{
-    padding: 20% 10% 0 0;
+    padding: 20% 5% 0 0;
 
 }

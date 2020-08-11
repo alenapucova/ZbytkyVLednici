@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import {
   Ingredient,
-  Unit,
   IngredientUtils
 } from "src/app/models/ingredient.model";
 import { FormControl } from "@angular/forms";
@@ -10,6 +9,8 @@ import { map, startWith } from "rxjs/operators";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Criteria } from "src/app/models/criteria.model";
 import { IngredientsService } from "src/app/ingredients.service";
+import { UserService } from 'src/app/user.service';
+import { User } from 'src/app/user.model';
 
 @Component({
   selector: "app-fridge-items",
@@ -17,6 +18,9 @@ import { IngredientsService } from "src/app/ingredients.service";
   styleUrls: ["./fridge-items.component.scss"]
 })
 export class FridgeItemsComponent implements OnInit {
+  @Input() showCriteria = true;
+  @Input() favouriteIngredients: Ingredient[] = new Array<Ingredient>();
+  //@Input() localStorage: boolean = true;
   @Output() ingredientsChanged = new EventEmitter<Ingredient[]>();
   @Output() criteriaChanged = new EventEmitter<Criteria>();
 
@@ -27,15 +31,30 @@ export class FridgeItemsComponent implements OnInit {
   amount: number;
   item: string;
   myControl = new FormControl();
+  user: User;
 
   options: Ingredient[] = [];
 
   filteredOptions: Observable<Ingredient[]>;
 
-  constructor(private ingredientService: IngredientsService) { }
+  constructor(private ingredientService: IngredientsService, private userService: UserService, ) { }
 
   ngOnInit() {
-    this.loadLocalStorage();
+    this.userService.getProfile().subscribe(
+      profile => {
+        this.user = profile.user;
+        this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
+          this.chosenIngredients = favouriteIngredients;
+          this.favouriteIngredients = favouriteIngredients;
+          console.log('favouriteIngredients', this.favouriteIngredients);
+        })
+      })
+
+    /* if (localStorage) {
+       this.chosenIngredients = this.favouriteIngredients;
+     } else {
+       this.loadLocalStorage();
+     }*/
     this.ingredientService.getIngredients().subscribe(ingredients => {
       this.options = ingredients;
       this.upDateOptions();
@@ -78,11 +97,13 @@ export class FridgeItemsComponent implements OnInit {
         this.amount = null;
         this.item = "";
 
-        //this.chosenIngredient = null;
+        this.chosenIngredient = null;
 
         this.ingredientsChanged.emit(this.chosenIngredients);
 
-        localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+        /* if (localStorage) {
+           localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+         }*/
         this.upDateOptions();
       } else {
         console.log("not a number");
@@ -98,7 +119,9 @@ export class FridgeItemsComponent implements OnInit {
       this.options.push(item);
       this.upDateOptions();
     }
-    localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+    /* if (localStorage) {
+       localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+     }*/
   }
 
   isNumber(n) {
@@ -123,15 +146,15 @@ export class FridgeItemsComponent implements OnInit {
   onCriteriaChanged(value: Criteria) {
     this.criteriaChanged.emit(value);
   }
-  loadLocalStorage() {
-    let localStoreItems = JSON.parse(localStorage.getItem("items"));
-
-    if (localStoreItems) {
-      this.chosenIngredients = localStoreItems as Ingredient[];
-      this.ingredientsChanged.emit(this.chosenIngredients);
-    }
-
-  }
+  /* loadLocalStorage() {
+     let localStoreItems = JSON.parse(localStorage.getItem("items"));
+     console.log('localstorage');
+     if (localStoreItems) {
+       this.chosenIngredients = localStoreItems as Ingredient[];
+       this.ingredientsChanged.emit(this.chosenIngredients);
+     }
+ 
+   }*/
   getUnitName(unit: string): string {
     return IngredientUtils.getUnitName(unit);
   }
