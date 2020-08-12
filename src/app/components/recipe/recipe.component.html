@@ -18,10 +18,10 @@
         </mat-card-header>
 
         <mat-card-actions>
-          <button mat-raised-button color="secondary" [routerLink]="['/detail', recipe._id]" routerLinkActive="active"
-            class="details">
+          <a mat-raised-button color="secondary" target="_blank" [routerLink]="['/detail', recipe._id]"
+            routerLinkActive="active" class="details">
             Podrobnosti
-          </button>
+          </a>
         </mat-card-actions>
       </mat-card>
     </div>

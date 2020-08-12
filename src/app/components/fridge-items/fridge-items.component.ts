@@ -50,15 +50,17 @@ export class FridgeItemsComponent implements OnInit {
         })
       })
 
-    /* if (localStorage) {
-       this.chosenIngredients = this.favouriteIngredients;
-     } else {
-       this.loadLocalStorage();
-     }*/
+
     this.ingredientService.getIngredients().subscribe(ingredients => {
       this.options = ingredients;
       this.upDateOptions();
     });
+    if (localStorage) {
+      //this.chosenIngredients = this.favouriteIngredients;
+
+    } else {
+      this.loadLocalStorage();
+    }
   }
 
   displayFn(ingredient: Ingredient): string {
@@ -101,9 +103,9 @@ export class FridgeItemsComponent implements OnInit {
 
         this.ingredientsChanged.emit(this.chosenIngredients);
 
-        /* if (localStorage) {
-           localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
-         }*/
+        if (localStorage) {
+          localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+        }
         this.upDateOptions();
       } else {
         console.log("not a number");
@@ -119,9 +121,9 @@ export class FridgeItemsComponent implements OnInit {
       this.options.push(item);
       this.upDateOptions();
     }
-    /* if (localStorage) {
-       localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
-     }*/
+    if (localStorage) {
+      localStorage.setItem("items", JSON.stringify(this.chosenIngredients));
+    }
   }
 
   isNumber(n) {
@@ -146,15 +148,15 @@ export class FridgeItemsComponent implements OnInit {
   onCriteriaChanged(value: Criteria) {
     this.criteriaChanged.emit(value);
   }
-  /* loadLocalStorage() {
-     let localStoreItems = JSON.parse(localStorage.getItem("items"));
-     console.log('localstorage');
-     if (localStoreItems) {
-       this.chosenIngredients = localStoreItems as Ingredient[];
-       this.ingredientsChanged.emit(this.chosenIngredients);
-     }
- 
-   }*/
+  loadLocalStorage() {
+    let localStoreItems = JSON.parse(localStorage.getItem("items"));
+    console.log('localstorage');
+    if (localStoreItems) {
+      this.chosenIngredients = localStoreItems as Ingredient[];
+      //this.ingredientsChanged.emit(this.chosenIngredients);
+    }
+
+  }
   getUnitName(unit: string): string {
     return IngredientUtils.getUnitName(unit);
   }

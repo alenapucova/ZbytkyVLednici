@@ -5,6 +5,7 @@ $ligh-bg: rgb(230, 225, 225);
 .example-form {
  
   display: flex;
+  justify-content: center;
 
   input
  {
@@ -28,7 +29,9 @@ $ligh-bg: rgb(230, 225, 225);
 .listOfItems {
   
   background-color: $ligh-bg;
+ 
   width: 75%;
+  max-width: 500px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
