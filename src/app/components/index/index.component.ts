@@ -21,10 +21,10 @@ export class IndexComponent implements OnInit {
   constructor(private recipeService: RecipeService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.recipeService.getRecipes().subscribe(recipes => {
-      this.allRecipes = recipes;
-      this.onChange();
-    });
+    /* this.recipeService.getRecipes().subscribe(recipes => {
+       this.allRecipes = recipes;
+       this.onChange();
+     });*/
   }
 
   onIngredientChange(ingredients: Ingredient[]) {

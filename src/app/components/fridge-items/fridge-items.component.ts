@@ -40,17 +40,17 @@ export class FridgeItemsComponent implements OnInit {
   constructor(private ingredientService: IngredientsService, private userService: UserService, ) { }
 
   ngOnInit() {
-    this.userService.getProfile().subscribe(
-      profile => {
-        this.user = profile.user;
-        this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
-          this.chosenIngredients = favouriteIngredients;
-          this.favouriteIngredients = favouriteIngredients;
-          console.log('favouriteIngredients', this.favouriteIngredients);
-        })
-      })
-
-
+    if (this.userService.loggedIn()) {
+      this.userService.getProfile().subscribe(
+        profile => {
+          this.user = profile.user;
+          this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
+            this.chosenIngredients = favouriteIngredients;
+            this.favouriteIngredients = favouriteIngredients;
+            console.log('favouriteIngredients', this.favouriteIngredients);
+          });
+        });
+    }
     this.ingredientService.getIngredients().subscribe(ingredients => {
       this.options = ingredients;
       this.upDateOptions();
