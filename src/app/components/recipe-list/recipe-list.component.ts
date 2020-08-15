@@ -42,8 +42,20 @@ export class RecipeListComponent implements OnInit {
         duration: 3000
       });
     } else {
+      this.user.favouriteRecipes = this.user.favouriteRecipes.filter(recipe => recipe._id !== value.id);
+      console.log('recipes', this.user.favouriteRecipes);
+      this.userService
+        .setFavouriteRecipe(this.user._id, value.id)
+        .subscribe(favRecipe => {
+          console.log("notfav", favRecipe);
+        });
+
+
+
+      this._snackBar.open("Recept byl smazán z oblíbených", "Skrýt", {
+        duration: 3000
+      });
       //udelta to same ale unset, udelat na to backedn
-      console.log('unset')
     }
 
 

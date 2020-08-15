@@ -124,7 +124,7 @@ router.route("/user/:userID/favouriteRecipes/:recipeID").get((req, res) => {
     }
     if (user.favouriteRecipes) {
       if (user.favouriteRecipes.find(e => e.id === recipeID)) {
-        console.log("Recipe is already marked as favourite");
+        user.favouriteRecipes = user.favouriteRecipes.filter(recipe => recipe._id !== recipeID);
       } else {
         user.favouriteRecipes.push(recipeID);
       }

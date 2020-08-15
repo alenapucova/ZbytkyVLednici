@@ -4,11 +4,10 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
-  favouriteRecipes: [
-    {
-      _id: string;
-    }
-  ],
+  favouriteRecipes:
+  {
+    _id: string;
+  }[],
   favouriteIngredients: [
     {
       _id: string;
