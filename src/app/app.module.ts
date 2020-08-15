@@ -23,7 +23,8 @@ import {
   MatFormFieldModule,
   MatButtonModule,
   MatTabsModule,
-  MatIconModule
+  MatIconModule,
+  MatProgressSpinnerModule
 } from "@angular/material";
 import { LoginComponent } from "./components/login/login.component";
 import { RecipeComponent } from "./components/recipe/recipe.component";
@@ -41,6 +42,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { AuthGuard } from "./guards/auth.guard";
 import { IngredientsService } from "./ingredients.service";
+import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
+import { SuggestedRecipeComponent } from './components/suggested-recipe/suggested-recipe.component';
 
 const appRoutes: Routes = [
   { path: "detail/:id", component: RecipeDetailComponent },
@@ -64,7 +67,9 @@ const appRoutes: Routes = [
     RecipeDetailComponent,
     IndexComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecipeListComponent,
+    SuggestedRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +93,8 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatTabsModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
 
   entryComponents: [LoginComponent],
@@ -105,4 +111,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

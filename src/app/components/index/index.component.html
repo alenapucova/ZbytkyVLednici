@@ -1,14 +1,39 @@
 <app-header></app-header>
 <div class="background">
   <div class="part-one">
-    <img class="bg-img" src="../../../assets/img/cooking2.png" alt="bg" />
+    <img class="bg-img" src="./assets/img/cooking2.png" alt="bg" />
   </div>
   <div class="part-two">
     <h1 class="main-header">Zadejte suroviny co máte doma</h1>
-    <app-fridge-items
-      (ingredientsChanged)="onIngredientChange($event)"
-      (criteriaChanged)="onCriteriaChanged($event)"
-    ></app-fridge-items>
+    <app-fridge-items [changeAfterLoad]="true" (ingredientsChanged)="onIngredientChange($event)"
+      (criteriaChanged)="onCriteriaChanged($event)">
+    </app-fridge-items>
   </div>
 </div>
-<app-recipe [recipes]="filteredRecipes"></app-recipe>
+
+<div *ngIf="!loading; else loadingBox">
+  <h2 *ngIf="filteredRecipes && filteredRecipes.length > 0; else no_recipes">
+    Nalezené recepty
+    <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
+  </h2>
+  <div class="suggested-recipe-panel" *ngIf="suggestedRecipes && suggestedRecipes.length > 0">Pokud byste měli další
+    ingredience, mohli byste
+    uvařit...
+  </div>
+  <app-suggested-recipe [suggestedRecipes]="suggestedRecipes"></app-suggested-recipe>
+</div>
+
+<ng-template #loadingBox>
+  <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+</ng-template>
+
+<ng-template #no_recipes>
+  <div id="no-recipes">
+    <h1 class="not-success">
+      Z toho nic neuvaříš, zkus ještě prohledat spíž a nebo si objednej něco až
+      domů
+    </h1>
+    <a href="https://www.damejidlo.cz" clas="damejidlo">
+      <img src="../../../assets/img/dj.png" alt="dame-jidlo" /></a>
+  </div>
+</ng-template>

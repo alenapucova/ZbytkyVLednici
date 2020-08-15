@@ -4,6 +4,7 @@ import { Recipe } from "src/app/recipe";
 import { RecipeService } from "src/app/recipe.service";
 import { MatDialog } from "@angular/material/dialog";
 import { Criteria } from "src/app/models/criteria.model";
+import { SuggestedRecipe } from 'src/app/models/suggestedRecipe.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +15,8 @@ import { Criteria } from "src/app/models/criteria.model";
 export class IndexComponent implements OnInit {
   allRecipes: Recipe[] = [];
   filteredRecipes: Recipe[] = [];
+  suggestedRecipes: SuggestedRecipe[] = [];
+  loading: boolean = true;
 
   selectedIngredients: Ingredient[];
   selectedCriteria: Criteria;
@@ -21,10 +24,12 @@ export class IndexComponent implements OnInit {
   constructor(private recipeService: RecipeService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    /* this.recipeService.getRecipes().subscribe(recipes => {
-       this.allRecipes = recipes;
-       this.onChange();
-     });*/
+    this.recipeService.getRecipes().subscribe(recipes => {
+      this.allRecipes = recipes;
+      this.onChange();
+      //setTimeout(() => this.loading = false, 2000);
+      this.loading = false
+    });
   }
 
   onIngredientChange(ingredients: Ingredient[]) {
@@ -42,6 +47,11 @@ export class IndexComponent implements OnInit {
 
   onChange() {
     this.filteredRecipes = this.recipeService.getFilteredRecipes(
+      this.allRecipes,
+      this.selectedIngredients,
+      this.selectedCriteria
+    );
+    this.suggestedRecipes = this.recipeService.getSuggestedRecipes(
       this.allRecipes,
       this.selectedIngredients,
       this.selectedCriteria

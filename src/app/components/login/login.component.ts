@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   email: String;
   password: String;
 
-  ngOnInit() {}
+  ngOnInit() { }
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   onNoClick(): void {
     //this.dialogRef.close();
@@ -62,13 +62,13 @@ export class LoginComponent implements OnInit {
     this.userService.authenticateUser(user).subscribe(data => {
       if (data.success) {
         this.userService.storeUserData(data.token, data.user);
-        this._snackBar.open("You are now logged in", "End now", {
+        this._snackBar.open("Přihlášení proběhlo úspěšně", "Skrýt", {
           duration: 3000
         });
         this.router.navigate(["profile"]);
         this.dialogRef.close();
       } else {
-        this._snackBar.open(data.message, "End now", {
+        this._snackBar.open("Přihlášení se nezdařilo", "Skrýt", {
           duration: 3000
         });
       }

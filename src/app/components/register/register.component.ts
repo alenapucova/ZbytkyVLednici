@@ -54,7 +54,7 @@ export class RegisterComponent {
 
     //required fields
     if (!this.userService.validateRegister(user)) {
-      this._snackBar.open("Please fill in all fields", "End now", {
+      this._snackBar.open("Vyplňte prosím všechna pole", "Skrýt", {
         duration: 3000
       });
 
@@ -62,7 +62,7 @@ export class RegisterComponent {
     }
     //validate Email
     if (!this.userService.validateEmail(user.email)) {
-      this._snackBar.open("Please fill valid email", "End now", {
+      this._snackBar.open("Použijte validní email", "Skrýt", {
         duration: 3000
       });
       return false;
@@ -71,13 +71,13 @@ export class RegisterComponent {
     //register user
     this.userService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this._snackBar.open("You are now registered and logged in", "End now", {
+        this._snackBar.open("Registrace a přihlášení proběhlo úspěšně", "Skrýt", {
           duration: 3000
         });
         this.dialogRef.close();
         this.router.navigate(["/profile"]);
       } else {
-        this._snackBar.open("Something went wrong", "End now", {
+        this._snackBar.open("Něco se pokazilo", "Skrýt", {
           duration: 3000
         });
       }

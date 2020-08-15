@@ -20,6 +20,7 @@ import { User } from 'src/app/user.model';
 export class FridgeItemsComponent implements OnInit {
   @Input() showCriteria = true;
   @Input() favouriteIngredients: Ingredient[] = new Array<Ingredient>();
+  @Input() changeAfterLoad: boolean = false;
   //@Input() localStorage: boolean = true;
   @Output() ingredientsChanged = new EventEmitter<Ingredient[]>();
   @Output() criteriaChanged = new EventEmitter<Criteria>();
@@ -47,6 +48,9 @@ export class FridgeItemsComponent implements OnInit {
           this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
             this.chosenIngredients = favouriteIngredients;
             this.favouriteIngredients = favouriteIngredients;
+            if (this.changeAfterLoad) {
+              this.ingredientsChanged.emit(this.chosenIngredients);
+            }
             console.log('favouriteIngredients', this.favouriteIngredients);
           });
         });
@@ -55,12 +59,6 @@ export class FridgeItemsComponent implements OnInit {
       this.options = ingredients;
       this.upDateOptions();
     });
-    if (localStorage) {
-      //this.chosenIngredients = this.favouriteIngredients;
-
-    } else {
-      this.loadLocalStorage();
-    }
   }
 
   displayFn(ingredient: Ingredient): string {

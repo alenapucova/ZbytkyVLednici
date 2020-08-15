@@ -17,30 +17,30 @@ export class SideBarComponent implements OnInit {
 
   @Output() criteriaChanged = new EventEmitter<Criteria>();
   criteria: Criteria = new Criteria();
-  
-  
-  portions = new SideBarRange("Počet porcí", 1, 4, 2, '../../../assets/img/plus.svg');
-  time =  new SideBarRange("Časová náročnost", 10, 90, 30, '../../../assets/img/alarm.svg');
-  style = new SideBarCheckbox("Styl stravování", [{id: 1, name: "Bez masa", checked: false},{id: 2, name: "Low carb", checked: false},{id: 3, name: "Bez lepku", checked: false}], '../../../assets/img/style.svg');
-  difficulty = new SideBarCheckbox("Obtížnost", [{id: 1, name: "Snadné", checked: false},{id: 2, name: "Středně náročné", checked: false},{id: 3, name: "Náročné", checked: false}], '../../../assets/img/difficulty.svg');
-  typeOfMeal = new SideBarCheckbox("Druh pokrmu", [{id: 1, name: "Hlavní chod", checked: false},{id: 2, name: "Polévka", checked: false},{id: 3, name: "Dezert", checked: false},{id: 4, name: "Svačinka", checked: false},{id: 5, name: "Snídaně", checked: false}], '../../../assets/img/meal.svg');
+
+
+  portions = new SideBarRange("Počet porcí", 1, 4, 1, '../../../assets/img/plus.svg');
+  time = new SideBarRange("Časová náročnost", 10, 90, 85, '../../../assets/img/alarm.svg');
+  style = new SideBarCheckbox("Styl stravování", [{ id: 1, name: "Bez masa", checked: false }, { id: 2, name: "Low carb", checked: false }, { id: 3, name: "Bez lepku", checked: false }], '../../../assets/img/style.svg');
+  difficulty = new SideBarCheckbox("Obtížnost", [{ id: 1, name: "Snadné", checked: false }, { id: 2, name: "Středně náročné", checked: false }, { id: 3, name: "Náročné", checked: false }], '../../../assets/img/difficulty.svg');
+  typeOfMeal = new SideBarCheckbox("Druh pokrmu", [{ id: 1, name: "Hlavní chod", checked: false }, { id: 2, name: "Polévka", checked: false }, { id: 3, name: "Dezert", checked: false }, { id: 4, name: "Svačinka", checked: false }, { id: 5, name: "Snídaně", checked: false }], '../../../assets/img/meal.svg');
 
   itemType = SideBarItemType;
 
-  constructor(private portionService: PortionsService) {    
-    
+  constructor(private portionService: PortionsService) {
+
   }
   ngOnInit() {
     this.loadCriteriaStorage();
     this.portionService.portion.subscribe(res => {
       this.portions.value = res;
-    });   
+    });
   }
   onTimeChanged() {
     this.criteria.time = this.time.value;
     this.criteriaChanged.emit(this.criteria);
     this.saveCriteriaStorage();
-    
+
   }
   onPortionsChanged() {
     this.criteria.portions = this.portions.value;
@@ -72,18 +72,18 @@ export class SideBarComponent implements OnInit {
     let localStoreCriteria = JSON.parse(localStorage.getItem("criteria"));
 
 
-    if(localStoreCriteria) {
+    if (localStoreCriteria) {
       this.criteria = localStoreCriteria;
       this.criteria.style && (this.style.options = this.criteria.style);
       this.criteria.typeOfMeal && (this.typeOfMeal.options = this.criteria.typeOfMeal);
       this.criteria.difficulty && (this.difficulty.options = this.criteria.difficulty);
       this.criteria.time && (this.time.value = this.criteria.time);
       this.criteria.portions && (this.portionService.nextPortions(this.criteria.portions));
-       
+
       this.criteriaChanged.emit(this.criteria);
     }
-    
+
     console.log(localStoreCriteria);
   }
-} 
+}
 

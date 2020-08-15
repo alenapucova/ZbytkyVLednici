@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 
 import { Recipe, Difficulty, FoodStyle } from "../../recipe";
 import { UserService } from "src/app/user.service";
@@ -10,25 +10,21 @@ import { User } from "src/app/user.model";
   styleUrls: ["./recipe.component.scss"]
 })
 export class RecipeComponent {
-  @Input() recipes: Recipe[];
+  @Input() recipe: Recipe;
+  @Input() isFavourite: boolean = false;
+  @Output() favouriteChange = new EventEmitter<{ id: string, isFavourite: boolean }>();
   user: User;
   favouriteRecipes: string[];
 
-  noGluten: string = "../../../assets/img/wheat.svg";
-  noMeat: string = "../../../assets/img/nomeat.svg";
-  lowCarb: string = "../../../assets/img/lc.svg";
+  noGluten: string = "./assets/img/wheat.svg";
+  noMeat: string = "./assets/img/nomeat.svg";
+  lowCarb: string = "./assets/img/lc.svg";
 
   constructor(public userService: UserService) { }
 
-  ngOnInit() {
-    this.userService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-      this.favouriteRecipes = this.user.favouriteRecipes.map(recipes => recipes._id);
-    });
-    console.log(this.recipes.map(recipe => recipe.foodStyle))
-  }
+  ngOnInit() { }
 
-  getDifficulty(difficulty: Difficulty) {
+  /*getDifficulty(difficulty: Difficulty) {
     if (difficulty.toString() === "Easy") {
       return "Snadné";
     } else if (difficulty.toString() === "Medium") {
@@ -36,27 +32,21 @@ export class RecipeComponent {
     } else if (difficulty.toString() === "Difficult") {
       return "Náročné";
     }
-  }
+  }*/
   getFoodStyle(foodStyle: FoodStyle): string {
-    if (foodStyle.toString() === "GlutenFree") {
+    if (foodStyle.toString() === "Bez lepku") {
       return this.noGluten;
-    } else if (foodStyle.toString() === "NoMeat") {
+    } else if (foodStyle.toString() === "Bez masa") {
       return this.noMeat;
-    } else if (foodStyle.toString() === "LowCarb") {
+    } else if (foodStyle.toString() === "Low carb") {
       return this.lowCarb;
     }
   }
-  getFavouriteRecipe(recipe: Recipe) {
-    this.userService
-      .setFavouriteRecipe(this.user._id, recipe._id)
-      .subscribe(favRecipe => {
-        console.log("fav", favRecipe);
-      });
-    this.user.favouriteRecipes.push({ _id: recipe._id });
-  }
-  isFavourite(recipe: Recipe): boolean {
-    if (this.favouriteRecipes) {
-      return this.favouriteRecipes.includes(recipe._id);
-    }
+
+  setFavouriteRecipe(event: any): void {
+    this.isFavourite = !this.isFavourite;
+    this.favouriteChange.emit({ id: this.recipe._id, isFavourite: this.isFavourite });
+
+    //event.stopPropagation();
   }
 }

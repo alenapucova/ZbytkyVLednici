@@ -35,7 +35,7 @@ export class HeaderComponent {
   }
   logoutUser() {
     this.userService.logout();
-    this._snackBar.open("You are logged out", "End now", {
+    this._snackBar.open("Odhlášení proběhlo úspěšně", "Skrýt", {
       duration: 3000
     });
     this.router.navigate(["/home"]);
