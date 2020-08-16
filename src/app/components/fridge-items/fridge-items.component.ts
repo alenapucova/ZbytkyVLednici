@@ -4,7 +4,7 @@ import {
   IngredientUtils
 } from "src/app/models/ingredient.model";
 import { FormControl } from "@angular/forms";
-import { Observable } from "rxjs";
+import { Observable, forkJoin } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Criteria } from "src/app/models/criteria.model";
@@ -19,15 +19,11 @@ import { User } from 'src/app/user.model';
 })
 export class FridgeItemsComponent implements OnInit {
   @Input() showCriteria = true;
-  @Input() favouriteIngredients: Ingredient[] = new Array<Ingredient>();
   @Input() changeAfterLoad: boolean = false;
-  //@Input() localStorage: boolean = true;
   @Output() ingredientsChanged = new EventEmitter<Ingredient[]>();
   @Output() criteriaChanged = new EventEmitter<Criteria>();
 
   chosenIngredient: Ingredient;
-  input: string;
-  selectedOption: string = "";
   chosenIngredients: Ingredient[] = new Array<Ingredient>();
   amount: number;
   item: string;
@@ -42,23 +38,36 @@ export class FridgeItemsComponent implements OnInit {
 
   ngOnInit() {
     if (this.userService.loggedIn()) {
-      this.userService.getProfile().subscribe(
-        profile => {
-          this.user = profile.user;
-          this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
-            this.chosenIngredients = favouriteIngredients;
-            this.favouriteIngredients = favouriteIngredients;
-            if (this.changeAfterLoad) {
-              this.ingredientsChanged.emit(this.chosenIngredients);
-            }
-            console.log('favouriteIngredients', this.favouriteIngredients);
-          });
-        });
+
+      forkJoin([
+        this.userService.getProfile(),
+        this.ingredientService.getIngredients()
+      ]).subscribe(results => {
+        this.options = results[1];
+        this.upDateOptions();
+        console.log('this.options', this.options);
+
+        this.user = results[0].user;
+        console.log('this.user', this.user);
+        this.userService.getFavouriteIngredients(this.user._id).subscribe(ingredients => {
+          this.chosenIngredients = ingredients;
+
+          this.chosenIngredients.forEach(ingredient => this.removeOption(this.options, ingredient._id));
+          this.upDateOptions();
+          console.log('chosenIngredients', this.chosenIngredients);
+
+          if (this.changeAfterLoad) {
+            this.ingredientsChanged.emit(this.chosenIngredients);
+          }
+        })
+      });
+    } else {
+      this.ingredientService.getIngredients().subscribe(ingredients => {
+        this.options = ingredients;
+        this.upDateOptions();
+        console.log('this.options', this.options);
+      });
     }
-    this.ingredientService.getIngredients().subscribe(ingredients => {
-      this.options = ingredients;
-      this.upDateOptions();
-    });
   }
 
   displayFn(ingredient: Ingredient): string {
