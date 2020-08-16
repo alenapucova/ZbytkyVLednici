@@ -22,8 +22,7 @@
               <h2 class="item item5">Můj seznam surovin</h2>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-fridge-items [showCriteria]="false" [favouriteIngredients]="favouriteIngredients"
-            (ingredientsChanged)="setFavouriteIngredient($event)">
+          <app-fridge-items [showCriteria]="false" (ingredientsChanged)="setFavouriteIngredient($event)">
           </app-fridge-items>
         </mat-expansion-panel>
       </div>

@@ -5,14 +5,13 @@ $secondary: #8bd8bd;
   display: grid;
   justify-content: space-between;
   grid-template-rows: 440px;
-  max-width: 1400px;
-  padding-bottom: 100px;
+  padding: 0px 5% 5% 5%;
   margin: auto;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 2%;
   row-gap: 50px;
 
-  
+  background-color: rgb(221, 220, 220);
 }
 h2 {
   text-align: center;
@@ -49,4 +48,11 @@ mat-card-header {
 
 a {
   text-align: center;
+}
+
+@media screen and (max-width: 1050px) {
+  .recipe-list {   
+    grid-template-columns: 1fr 1fr ; 
+    padding: 0px 5%;
+  }
 }

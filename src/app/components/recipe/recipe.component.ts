@@ -27,19 +27,9 @@ export class RecipeComponent {
   ngOnInit() {
     this.portionService.portion.subscribe(portion => {
       this.portion = portion;
-      console.log('Portion from recipe component', this.portion);
     });
   }
 
-  /*getDifficulty(difficulty: Difficulty) {
-    if (difficulty.toString() === "Easy") {
-      return "Snadné";
-    } else if (difficulty.toString() === "Medium") {
-      return "Středně obtížné";
-    } else if (difficulty.toString() === "Difficult") {
-      return "Náročné";
-    }
-  }*/
   getFoodStyle(foodStyle: FoodStyle): string {
     if (foodStyle.toString() === "Bez lepku") {
       return this.noGluten;
@@ -53,7 +43,5 @@ export class RecipeComponent {
   setFavouriteRecipe(event: any): void {
     this.isFavourite = !this.isFavourite;
     this.favouriteChange.emit({ id: this.recipe._id, isFavourite: this.isFavourite });
-
-    //event.stopPropagation();
   }
 }

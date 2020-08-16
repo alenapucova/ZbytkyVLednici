@@ -3,7 +3,7 @@ import { Recipe } from "./recipe";
 import { Ingredient } from "./models/ingredient.model";
 import { Criteria } from "./models/criteria.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { SuggestedRecipe } from './models/suggestedRecipe.model';
 
 @Injectable({
@@ -16,12 +16,7 @@ export class RecipeService {
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${this.uri}/recipes`);
   }
-  getFilteredRecipes(
-    recipes: Recipe[],
-    ingredients?: Ingredient[],
-    criteria?: Criteria
-  ): Recipe[] {
-    let crit;
+  getFilteredRecipes(recipes: Recipe[], ingredients?: Ingredient[], criteria?: Criteria): Recipe[] {
     let filteredRecipes: Recipe[] = recipes;
     if (ingredients && ingredients.length > 0) {
       filteredRecipes = recipes.filter(recipe =>
@@ -35,38 +30,7 @@ export class RecipeService {
         )
       );
     }
-
-    if (criteria) {
-      console.log("criterie", criteria);
-      if (criteria.style && criteria.style.length > 0) {
-        crit = criteria.style.filter(style => style.checked);
-
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(style => recipe.foodStyle.includes(style.name)
-          )
-        );
-      }
-      if (criteria.typeOfMeal && criteria.typeOfMeal.length > 0) {
-        crit = criteria.typeOfMeal.filter(type => type.checked);
-
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(type => recipe.foodType.includes(type.name))
-        );
-      }
-      if (criteria.difficulty && criteria.difficulty.length > 0) {
-        crit = criteria.difficulty.filter(diff => diff.checked);
-
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(diff => recipe.difficulty.includes(diff.name))
-        );
-      }
-      if (criteria.time) {
-        filteredRecipes = filteredRecipes.filter(
-          recipe => recipe.time <= criteria.time
-        );
-      }
-    }
-    console.warn("filtered recipes", filteredRecipes);
+    filteredRecipes = this.filterByCriteria(criteria, filteredRecipes);
     return filteredRecipes;
   }
 
@@ -76,8 +40,6 @@ export class RecipeService {
 
 
   getSuggestedRecipes(recipes: Recipe[], ingredients?: Ingredient[], criteria?: Criteria): SuggestedRecipe[] {
-    console.log('suggested recipes ON');
-    let crit;
     let suggestedRecipes: SuggestedRecipe[] = [];
     if (ingredients && ingredients.length > 0) {
       recipes.forEach(recipe => {
@@ -100,39 +62,32 @@ export class RecipeService {
       });
     }
 
-    /*if (criteria) {
-      console.log("criterie", criteria);
-      if (criteria.style && criteria.style.length > 0) {
-        crit = criteria.style.filter(style => style.checked);
+    suggestedRecipes.forEach(suggested => this.filterByCriteria(criteria, suggested.recipes));
+    return suggestedRecipes;
+  }
 
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(style => {
-            recipe.foodStyle.includes(style.id);
-            console.log("id", style.id);
-          })
-        );
-      }
-      if (criteria.typeOfMeal && criteria.typeOfMeal.length > 0) {
-        crit = criteria.typeOfMeal.filter(type => type.checked);
-
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(type => recipe.foodType.includes(type.id))
-        );
-      }
-      if (criteria.difficulty && criteria.difficulty.length > 0) {
-        crit = criteria.difficulty.filter(diff => diff.checked);
-
-        filteredRecipes = filteredRecipes.filter(recipe =>
-          crit.every(diff => recipe.difficulty.includes(diff.id))
-        );
-      }
+  filterByCriteria(criteria: Criteria, recipes: Recipe[]): Recipe[] {
+    let filtered: Recipe[] = recipes;
+    if (criteria) {
+      filtered = this.filterByCriterium(() => criteria.style, (recipe: Recipe) => recipe.foodStyle, filtered);
+      filtered = this.filterByCriterium(() => criteria.typeOfMeal, (recipe: Recipe) => recipe.foodType, filtered);
+      filtered = this.filterByCriterium(() => criteria.difficulty, (recipe: Recipe) => recipe.difficulty, filtered);
       if (criteria.time) {
-        filteredRecipes = filteredRecipes.filter(
+        recipes = recipes.filter(
           recipe => recipe.time <= criteria.time
         );
       }
-    }*/
-    console.warn("suggestedRecipes", suggestedRecipes);
-    return suggestedRecipes;
+    }
+    return filtered;
+  }
+
+  filterByCriterium(criteriaField, recipeField, recipes: Recipe[]): Recipe[] {
+    if (criteriaField() && criteriaField().length > 0) {
+      const crit = criteriaField().filter(criterium => criterium.checked);
+      return recipes.filter(recipe =>
+        crit.every(criterium => recipeField(recipe).map(s => s.toString()).includes(criterium.name))
+      )
+    }
+    return [];
   }
 }

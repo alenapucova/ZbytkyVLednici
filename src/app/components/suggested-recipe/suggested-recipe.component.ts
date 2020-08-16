@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SuggestedRecipe } from 'src/app/models/suggestedRecipe.model';
 
 @Component({
@@ -6,12 +6,6 @@ import { SuggestedRecipe } from 'src/app/models/suggestedRecipe.model';
   templateUrl: './suggested-recipe.component.html',
   styleUrls: ['./suggested-recipe.component.scss']
 })
-export class SuggestedRecipeComponent implements OnInit {
+export class SuggestedRecipeComponent {
   @Input() suggestedRecipes: SuggestedRecipe[] = [];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

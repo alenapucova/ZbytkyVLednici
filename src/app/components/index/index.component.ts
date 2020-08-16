@@ -21,22 +21,20 @@ export class IndexComponent implements OnInit {
   selectedIngredients: Ingredient[];
   selectedCriteria: Criteria;
 
-  constructor(private recipeService: RecipeService, public dialog: MatDialog) { }
+  constructor(
+    private recipeService: RecipeService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(recipes => {
       this.allRecipes = recipes;
       this.onChange();
-      //setTimeout(() => this.loading = false, 2000);
       this.loading = false
     });
   }
 
   onIngredientChange(ingredients: Ingredient[]) {
-
-    console.log('from index');
-    ingredients.map(ingredient => ingredient.name)
-
     this.selectedIngredients = ingredients;
     this.onChange();
   }

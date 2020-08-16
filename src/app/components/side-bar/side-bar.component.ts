@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { SideBarItem as SideBarItem, SideBarItemType } from '../../models/sideBar-item.model';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { SideBarItemType } from '../../models/sideBar-item.model';
 import { SideBarRange } from 'src/app/models/sideBarRange.model';
 import { SideBarCheckbox } from 'src/app/models/sideBarCheckbox.model';
 import { NameAndValue } from 'src/app/models/name-and-value.model';
@@ -31,6 +31,7 @@ export class SideBarComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.portions.value = 2;
     this.loadCriteriaStorage();
     this.portionService.portion.subscribe(res => {
       this.portions.value = res;
@@ -50,8 +51,6 @@ export class SideBarComponent implements OnInit {
   }
   onStyleChanged(option: NameAndValue, $event: any) {
     this.criteria.style = this.style.options;
-    console.log('onstylechanged');
-    console.log($event);
     this.criteriaChanged.emit(this.criteria);
     this.saveCriteriaStorage();
   }

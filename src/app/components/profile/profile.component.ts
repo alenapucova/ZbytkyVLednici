@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/user.service";
 import { RecipeService } from "src/app/recipe.service";
-import { MatSnackBar } from "@angular/material";
 import { User } from "src/app/user.model";
 import { Recipe } from "src/app/recipe";
 import { Ingredient } from 'src/app/models/ingredient.model';
@@ -14,12 +13,10 @@ import { Ingredient } from 'src/app/models/ingredient.model';
 export class ProfileComponent implements OnInit {
   user: User;
   favouriteRecipes: Recipe[] = [];
-  favouriteIngredients: Ingredient[] = [];
 
   constructor(
     private userService: UserService,
-    private recipeService: RecipeService,
-    private _snackBar: MatSnackBar
+    private recipeService: RecipeService
   ) { }
 
   ngOnInit() {
@@ -37,10 +34,6 @@ export class ProfileComponent implements OnInit {
                 });
             });
           });
-        /*this.userService.getFavouriteIngredients(this.user._id).subscribe(favouriteIngredients => {
-          this.favouriteIngredients = favouriteIngredients;
-          console.log('favouriteIngredients', this.favouriteIngredients);
-        })*/
       },
       err => {
         console.log(err);

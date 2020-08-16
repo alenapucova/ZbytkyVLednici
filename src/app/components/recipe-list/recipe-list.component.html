@@ -1,6 +1,4 @@
 <div class="recipe-block">
-
-
     <div class="recipe-list">
         <div *ngFor="let recipe of recipes" class="recipe">
             <app-recipe [recipe]="recipe" [isFavourite]="isFavourite(recipe)" (favouriteChange)="setFavourite($event)">

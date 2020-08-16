@@ -12,10 +12,12 @@
 </div>
 
 <div *ngIf="!loading; else loadingBox">
-  <h2 *ngIf="filteredRecipes && filteredRecipes.length > 0; else no_recipes">
-    Nalezené recepty
+  <div *ngIf="filteredRecipes && filteredRecipes.length > 0; else no_recipes">
+    <h2>
+      Nalezené recepty
+    </h2>
     <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
-  </h2>
+  </div>
   <div class="suggested-recipe-panel" *ngIf="suggestedRecipes && suggestedRecipes.length > 0">Pokud byste měli další
     ingredience, mohli byste
     uvařit...

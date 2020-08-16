@@ -49,10 +49,7 @@ export class LoginComponent implements OnInit {
       data: { name: this.name, name2: this.name2 }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-      //this.user = result;
-    });
+    dialogRef.afterClosed().subscribe();
   }
   loginUser() {
     const user = {

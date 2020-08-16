@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/user.service';
 import { User } from 'src/app/user.model';
 import { Recipe } from 'src/app/recipe';
@@ -14,13 +14,16 @@ export class RecipeListComponent implements OnInit {
   user: User;
   favouriteRecipes: string[];
 
-  constructor(public userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(public userService: UserService, private _snackBar: MatSnackBar, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.userService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-      this.favouriteRecipes = this.user.favouriteRecipes.map(recipes => recipes._id);
-    });
+    if (this.userService.loggedIn()) {
+      this.userService.getProfile().subscribe(profile => {
+        this.user = profile.user;
+        this.favouriteRecipes = this.user.favouriteRecipes.map(recipes => recipes._id);
+        this.ref.detectChanges();
+      });
+    }
   }
   isFavourite(recipe: Recipe): boolean {
     if (this.favouriteRecipes) {
@@ -29,33 +32,22 @@ export class RecipeListComponent implements OnInit {
     return false;
   }
   setFavourite(value: { id: string, isFavourite: boolean }) {
-    console.log('value', value);
     if (value.isFavourite) {
-      console.log(value);
       this.userService
         .setFavouriteRecipe(this.user._id, value.id)
-        .subscribe(favRecipe => {
-          console.log("fav", favRecipe);
-        });
+        .subscribe();
       this.user.favouriteRecipes.push({ _id: value.id });
       this._snackBar.open("Recept byl uložen do oblíbených", "Skrýt", {
         duration: 3000
       });
     } else {
       this.user.favouriteRecipes = this.user.favouriteRecipes.filter(recipe => recipe._id !== value.id);
-      console.log('recipes', this.user.favouriteRecipes);
       this.userService
         .setFavouriteRecipe(this.user._id, value.id)
-        .subscribe(favRecipe => {
-          console.log("notfav", favRecipe);
-        });
-
-
-
+        .subscribe();
       this._snackBar.open("Recept byl smazán z oblíbených", "Skrýt", {
         duration: 3000
       });
-      //udelta to same ale unset, udelat na to backedn
     }
 
 
