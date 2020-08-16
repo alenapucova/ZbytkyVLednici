@@ -47,6 +47,7 @@ import { SuggestedRecipeComponent } from './components/suggested-recipe/suggeste
 
 const appRoutes: Routes = [
   { path: "detail/:id", component: RecipeDetailComponent },
+  { path: "detail/:id/portions/:portions", component: RecipeDetailComponent },
   { path: "home", component: IndexComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },

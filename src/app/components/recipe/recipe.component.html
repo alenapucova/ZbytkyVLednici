@@ -11,8 +11,8 @@
   </mat-card-header>
 
   <mat-card-actions>
-    <a mat-raised-button color="secondary" class="details" target="_blank" [routerLink]="['/detail', recipe._id]"
-      routerLinkActive="active">
+    <a mat-raised-button color="secondary" class="details" target="_blank"
+      [routerLink]="['/detail', recipe._id, 'portions', portion]" routerLinkActive="active">
       Podrobnosti
     </a>
   </mat-card-actions>

@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { Recipe } from "../../recipe";
 import { RecipeService } from "../../recipe.service";
 import { ActivatedRoute } from "@angular/router";
-import { PortionsService } from "src/app/portions.service";
 import { IngredientUtils, Unit } from "src/app/models/ingredient.model";
 
 @Component({
@@ -17,7 +16,6 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
-    private portionService: PortionsService,
     private route: ActivatedRoute
   ) { }
 
@@ -26,9 +24,8 @@ export class RecipeDetailComponent implements OnInit {
       this.recipeService.getRecipeById(params.get("id")).subscribe(recipe => {
         this.recipe = recipe;
       });
-    });
-    this.portionService.portion.subscribe(res => {
-      this.portion = res;
+      this.portion = +params.get("portions");
+      console.log('portions', this.portion);
     });
   }
   getFullAmount(amount: number): number {

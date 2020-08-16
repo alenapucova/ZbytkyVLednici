@@ -3,6 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { Recipe, Difficulty, FoodStyle } from "../../recipe";
 import { UserService } from "src/app/user.service";
 import { User } from "src/app/user.model";
+import { PortionsService } from 'src/app/portions.service';
 
 @Component({
   selector: "app-recipe",
@@ -15,14 +16,20 @@ export class RecipeComponent {
   @Output() favouriteChange = new EventEmitter<{ id: string, isFavourite: boolean }>();
   user: User;
   favouriteRecipes: string[];
+  portion: number;
 
   noGluten: string = "./assets/img/wheat.svg";
   noMeat: string = "./assets/img/nomeat.svg";
   lowCarb: string = "./assets/img/lc.svg";
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService, public portionService: PortionsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.portionService.portion.subscribe(portion => {
+      this.portion = portion;
+      console.log('Portion from recipe component', this.portion);
+    });
+  }
 
   /*getDifficulty(difficulty: Difficulty) {
     if (difficulty.toString() === "Easy") {
