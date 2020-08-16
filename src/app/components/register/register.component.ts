@@ -71,6 +71,7 @@ export class RegisterComponent {
     //register user
     this.userService.registerUser(user).subscribe(data => {
       if (data.success) {
+        this.userService.storeUserData(data.token, data.user);
         this._snackBar.open("Registrace a přihlášení proběhlo úspěšně", "Skrýt", {
           duration: 3000
         });
