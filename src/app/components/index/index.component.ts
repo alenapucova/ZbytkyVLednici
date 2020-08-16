@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Ingredient } from "src/app/models/ingredient.model";
-import { Recipe } from "src/app/recipe";
+import { Recipe } from "src/app/models/recipe.model";
 import { RecipeService } from "src/app/recipe.service";
 import { MatDialog } from "@angular/material/dialog";
 import { Criteria } from "src/app/models/criteria.model";
@@ -29,8 +29,9 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(recipes => {
       this.allRecipes = recipes;
+      console.log('recipes', this.allRecipes);
       this.onChange();
-      this.loading = false
+      this.loading = false;
     });
   }
 
@@ -49,6 +50,7 @@ export class IndexComponent implements OnInit {
       this.selectedIngredients,
       this.selectedCriteria
     );
+    console.log('filtered', this.filteredRecipes);
     this.suggestedRecipes = this.recipeService.getSuggestedRecipes(
       this.allRecipes,
       this.selectedIngredients,

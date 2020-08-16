@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/user.service";
 import { RecipeService } from "src/app/recipe.service";
-import { User } from "src/app/user.model";
-import { Recipe } from "src/app/recipe";
+import { User } from "src/app/models/user.model";
+import { Recipe } from "src/app/models/recipe.model";
 import { Ingredient } from 'src/app/models/ingredient.model';
 
 @Component({

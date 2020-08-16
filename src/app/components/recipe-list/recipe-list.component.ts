@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/user.service';
-import { User } from 'src/app/user.model';
-import { Recipe } from 'src/app/recipe';
+import { User } from 'src/app/models/user.model';
+import { Recipe } from 'src/app/models/recipe.model';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

@@ -10,7 +10,7 @@ import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Criteria } from "src/app/models/criteria.model";
 import { IngredientsService } from "src/app/ingredients.service";
 import { UserService } from 'src/app/user.service';
-import { User } from 'src/app/user.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: "app-fridge-items",

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 
-import { Recipe, Difficulty, FoodStyle } from "../../recipe";
+import { Recipe, Difficulty, FoodStyle } from "../../models/recipe.model";
 import { UserService } from "src/app/user.service";
-import { User } from "src/app/user.model";
+import { User } from "src/app/models/user.model";
 import { PortionsService } from 'src/app/portions.service';
 
 @Component({

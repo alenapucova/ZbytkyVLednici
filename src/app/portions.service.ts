@@ -7,9 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 export class PortionsService {
 
   public static readonly DEFAULT_PORTIONS = 2;
-  
   private numberOfPortions = new BehaviorSubject<number>(PortionsService.DEFAULT_PORTIONS);
   portion = this.numberOfPortions.asObservable();
+
+  constructor() {
+    this.nextPortions(PortionsService.DEFAULT_PORTIONS);
+  }
 
   nextPortions(portion: number) {
     console.log('portion', portion);

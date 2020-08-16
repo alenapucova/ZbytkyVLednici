@@ -5,7 +5,7 @@ import {
   MatDialog
 } from "@angular/material/dialog";
 import { UserService } from "../../user.service";
-import { User } from "../../user.model";
+import { User } from "../../models/user.model";
 import { Router } from "@angular/router";
 import { DialogData } from "../login/login.component";
 import { MatSnackBar } from "@angular/material/snack-bar";

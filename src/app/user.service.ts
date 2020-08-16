@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
-import { Recipe } from "./recipe";
+import { Recipe } from "./models/recipe.model";
 import { Observable } from "rxjs";
 import { Ingredient } from './models/ingredient.model';
 

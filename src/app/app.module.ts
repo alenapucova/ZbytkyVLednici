@@ -11,8 +11,6 @@ import { FridgeItemsComponent } from "./components/fridge-items/fridge-items.com
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSliderModule } from "@angular/material/slider";
-import { SideBarRangeComponent } from "./components/side-bar-range/side-bar-range.component";
-import { SideBarCheckboxComponent } from "./components/side-bar-checkbox/side-bar-checkbox.component";
 import {
   MatDialogModule,
   MatDialogRef,
@@ -61,8 +59,6 @@ const appRoutes: Routes = [
     SideBarComponent,
     HeaderComponent,
     FridgeItemsComponent,
-    SideBarRangeComponent,
-    SideBarCheckboxComponent,
     LoginComponent,
     RecipeComponent,
     RecipeDetailComponent,

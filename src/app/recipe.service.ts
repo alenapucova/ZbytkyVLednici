@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Recipe } from "./recipe";
+import { Recipe } from "./models/recipe.model";
 import { Ingredient } from "./models/ingredient.model";
 import { Criteria } from "./models/criteria.model";
 import { HttpClient } from "@angular/common/http";
