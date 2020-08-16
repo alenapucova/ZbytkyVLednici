@@ -22,11 +22,9 @@ export class RecipeService {
       filteredRecipes = recipes.filter(recipe =>
         recipe.ingredients.every(
           recipeIngredient =>
-            ingredients.filter(
-              ingredient =>
-                recipeIngredient._id === ingredient._id &&
-                recipeIngredient.amount * criteria.portions <= ingredient.amount
-            ).length > 0
+            !!ingredients.find(ingredient =>
+              recipeIngredient._id === ingredient._id &&
+              recipeIngredient.amount * criteria.portions <= ingredient.amount)
         )
       );
     }
@@ -73,7 +71,7 @@ export class RecipeService {
       filtered = this.filterByCriterium(() => criteria.typeOfMeal, (recipe: Recipe) => recipe.foodType, filtered);
       filtered = this.filterByCriterium(() => criteria.difficulty, (recipe: Recipe) => recipe.difficulty, filtered);
       if (criteria.time) {
-        recipes = recipes.filter(
+        filtered = filtered.filter(
           recipe => recipe.time <= criteria.time
         );
       }
@@ -88,6 +86,6 @@ export class RecipeService {
         crit.every(criterium => recipeField(recipe).map(s => s.toString()).includes(criterium.name))
       )
     }
-    return [];
+    return recipes;
   }
 }
