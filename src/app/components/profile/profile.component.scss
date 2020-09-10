@@ -1,33 +1,6 @@
 $primary: #243665;
 $secondary: #8bd8bd;
-/*
-.part-one {
-}
-.part-two {
-  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-  background: linear-gradient(to left, #867f7f, #dbdbe2);
-}
 
-.background {
-  display: grid;
-  grid-template-columns: 6fr 4fr;
-  min-height: 100%;
-}
-.profile {
-  display: flex;
-  padding: 0px 100px 100px 100px;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid black;
-}
-.background {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-*/
 .back-btn {
   position: fixed;
   top: 0px;
@@ -40,8 +13,8 @@ body {
 .info {
   font-family: "Gotu", sans-serif;
   min-height: 980px;
-  padding-top: 100px; 
-  background: linear-gradient(to right, rgb(197, 226, 207), rgb(161, 241, 177));
+  padding-top: 40px; 
+  //background: linear-gradient(to right, rgb(197, 226, 207), rgb(161, 241, 177));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +25,8 @@ body {
   padding: 10px 0px;
 }
 .fav-recipes{
-  margin-top: 100px;
+  margin-top: 70px;
+  padding-top: 30px;
 }
 .item4, .item5 {
   padding: 0px;
@@ -62,7 +36,7 @@ body {
 mat-expansion-panel {
   width: 1450px;
   text-align: center;
-  background-color:  rgb(93, 124, 99);
+  background-color:  rgb(140, 146, 141);
   margin-bottom: 30px;
 }
 mat-panel-title {
