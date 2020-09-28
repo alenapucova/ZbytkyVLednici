@@ -31,6 +31,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully!");
 });
 
+const port = process.env.PORT || 8080;
 //routes for users
 router.route("/users").get((req, res) => {
   User.find((err, users) => {
@@ -290,7 +291,7 @@ router.route("/ingredient/:id").get((req, res, next) => {
 
 app.use("/", router);
 
-app.listen(4000, () => console.log(`Express server running on port 4000`));
+app.listen(port, () => console.log(`Express server running on port 4000`));
 
 module.exports = router;
 

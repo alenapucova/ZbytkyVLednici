@@ -10,7 +10,7 @@ import { Ingredient } from './models/ingredient.model';
   providedIn: "root"
 })
 export class UserService {
-  uri = "http://localhost:4000";
+  //uri = "http://localhost:4000";
   authToken: any;
   user: any;
 
@@ -36,14 +36,14 @@ export class UserService {
     let httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
-    return this.http.post<any>(`${this.uri}/users/register`, user, httpOptions);
+    return this.http.post<any>(`/users/register`, user, httpOptions);
   }
   authenticateUser(user) {
     let httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
     return this.http.post<any>(
-      `${this.uri}/users/authenticate`,
+      `/users/authenticate`,
       user,
       httpOptions
     );
@@ -56,7 +56,7 @@ export class UserService {
         Authorization: this.authToken
       })
     };
-    return this.http.get<any>(`${this.uri}/users/profile`, httpOptions);
+    return this.http.get<any>(`/users/profile`, httpOptions);
   }
   storeUserData(token, user) {
     localStorage.setItem("id_token", token);
@@ -82,13 +82,13 @@ export class UserService {
 
   setFavouriteRecipe(userID: string, recipeID: string): Observable<any> {
     return this.http.get<any>(
-      `${this.uri}/user/${userID}/favouriteRecipes/${recipeID}`
+      `/user/${userID}/favouriteRecipes/${recipeID}`
     );
   }
 
   getFavouriteRecipes(userID: string): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(
-      `${this.uri}/user/${userID}/favouriteRecipes`
+      `/user/${userID}/favouriteRecipes`
     );
   }
 
@@ -99,12 +99,12 @@ export class UserService {
     console.log('favIngredient', favouriteIngredients)
     const fav = JSON.stringify(favouriteIngredients)
     return this.http.post<any>(
-      `${this.uri}/user/${userID}/setFavouriteIngredients`, favouriteIngredients, httpOptions
+      `/user/${userID}/setFavouriteIngredients`, favouriteIngredients, httpOptions
     );
   }
   getFavouriteIngredients(userID: string): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(
-      `${this.uri}/user/${userID}/favouriteIngredients`
+      `/user/${userID}/favouriteIngredients`
     );
   }
 }

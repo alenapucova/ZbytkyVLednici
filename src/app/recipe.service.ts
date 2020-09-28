@@ -10,11 +10,11 @@ import { SuggestedRecipe } from './models/suggestedRecipe.model';
   providedIn: "root"
 })
 export class RecipeService {
-  uri = "http://localhost:4000";
+  // uri = "http://localhost:4000";
   constructor(private http: HttpClient) { }
 
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${this.uri}/recipes`);
+    return this.http.get<Recipe[]>(`/recipes`);
   }
   getFilteredRecipes(recipes: Recipe[], ingredients?: Ingredient[], criteria?: Criteria): Recipe[] {
     let filteredRecipes: Recipe[] = recipes;
@@ -33,7 +33,7 @@ export class RecipeService {
   }
 
   getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get<Recipe>(`${this.uri}/recipe/${id}`);
+    return this.http.get<Recipe>(`/recipe/${id}`);
   }
 
 

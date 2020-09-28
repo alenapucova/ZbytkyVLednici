@@ -12,18 +12,14 @@
           </li>
         </ul>
         <h4>Počet porcí: {{ getPortions() }}</h4>
+        <h4>Doba vaření: {{ recipe.time }} minut</h4>
+        <h4>Náročnost vaření: {{ recipe.difficulty }}</h4>
         <h4>Postup:</h4>
         <p class="progress">{{ recipe.progress }}</p>
       </div>
     </div>
     <div class="btn-section">
-      <button
-        mat-raised-button
-        color="primary"
-        class="back-btn button"
-        routerLink="/home"
-        routerLinkActive="active"
-      >
+      <button mat-raised-button color="primary" class="back-btn button" routerLink="/home" routerLinkActive="active">
         Zpět na výpis receptů
       </button>
     </div>
@@ -31,11 +27,7 @@
 
   <div class="detail-part-two">
     <div class="recipe-detail">
-      <img
-        class="recipe-detail-img"
-        src="../../../assets/img/{{ recipe._id }}max.jpg"
-        alt="recipe-detail"
-      />
+      <img class="recipe-detail-img" src="../../../assets/img/{{ recipe._id }}max.jpg" alt="recipe-detail" />
     </div>
   </div>
 </div>

@@ -7,11 +7,11 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class IngredientsService {
-  uri = "http://localhost:4000";
+  //uri = "http://localhost:4000";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getIngredients(): Observable<Ingredient[]> {
-    return this.http.get<Ingredient[]>(`${this.uri}/ingredients`);
+    return this.http.get<Ingredient[]>(`/ingredients`);
   }
 }
