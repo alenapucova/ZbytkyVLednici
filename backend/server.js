@@ -32,7 +32,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully!");
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 //routes for users
 router.route("/users").get((req, res) => {
   User.find((err, users) => {
