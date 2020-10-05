@@ -7,7 +7,6 @@ const Recipe = require("./models/Recipe");
 const User = require("./models/User");
 const Ingredient = require("./models/Ingredient");
 const jwt = require("jsonwebtoken");
-const path = require('path');
 
 const config = require("./config/database");
 
@@ -294,14 +293,7 @@ app.use("/api", router);
 
 app.listen(port, () => console.log(`Express server running on port 4000`));
 
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/dist'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'dist/cookBook', 'index.html'));
-  });
-}
 
 module.exports = router;
 
